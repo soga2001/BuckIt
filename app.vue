@@ -106,7 +106,7 @@ export default defineComponent({
               </ion-item>
             </NuxtLink> -->
 
-            <a-dropdown :trigger="['click']" v-if="store.isAuthenticated">
+            <!-- <a-dropdown :trigger="['click']" v-if="store.isAuthenticated">
               <ion-avatar>
                 <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
               </ion-avatar>
@@ -125,7 +125,7 @@ export default defineComponent({
                   <a-menu-item key="3">3rd menu item</a-menu-item>
                 </a-menu>
               </template>
-            </a-dropdown>
+            </a-dropdown> -->
             
         </ion-tab-bar>
       </ion-tabs>
