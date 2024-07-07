@@ -8,12 +8,12 @@ import {useStore} from '~/stores/myStore'
 
 definePageMeta({
   auth: false,
-  name: "login",
+  name: "register",
 })
 
 useSeoMeta({
-  title: 'Login',
-  description: 'This is the login page',
+  title: 'Register',
+  description: 'This is the registration page',
   
 })
 
@@ -44,18 +44,9 @@ export default defineComponent({
           email: this.email,
           password: this.password,
         })
-        
-        // const response: {error?: string, authenticated?: boolean, user?: User} = await $fetch('/api/login', {
-        //     method: "POST",
-        //     body: {
-        //         email: this.email,
-        //         password: this.password
-        //     }
-        // })
 
         if (error) {
           this.error = error.message
-          // console.log(error)
         } else {
           this.store.setUser(session?.user as User)
           this.store.changeAuthenticated(true)
@@ -75,7 +66,7 @@ export default defineComponent({
         <div class="main">
                 <form class="form" ref="loginForm" @submit.prevent="login">
                     <div class="title">
-                        <h1>Login</h1>
+                        <h1>Register</h1>
                     </div>
                     <div class="flex-column">
                         <label>Email </label></div>
@@ -88,7 +79,7 @@ export default defineComponent({
                           <label>Password </label>
                         </div>
 
-                        <ion-input placeholder="Enter your password" v-model="password" :type="isPassword ? 'password' : 'text'">
+                        <ion-input placeholder="Enter your password" :type="isPassword ? 'password' : 'text'">
                           <ion-icon slot="start" :icon="ioniconsLockClosed" aria-hidden="true"></ion-icon>
                           <ion-button fill="clear" slot="end" aria-label="Show/hide" @click="isPassword = !isPassword">
                             <ion-icon slot="icon-only" :icon="isPassword ? ioniconsEyeOutline : ioniconsEyeOffOutline" aria-hidden="true"></ion-icon>

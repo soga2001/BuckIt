@@ -11,14 +11,15 @@
   },
   "dependencies": {
     "@ant-design-vue/nuxt": "^1.4.2",
-    "@ant-design/icons-vue": "^7.0.1",
     "@nuxtjs/ionic": "^0.15.0",
     "@nuxtjs/supabase": "^1.2.2",
+    "@pinia/nuxt": "^0.5.1",
     "ant-design-vue": "^4.2.3",
     "nuxt": "^3.12.3",
+    "pinia": "^2.1.7",
     "vue": "latest"
   },
   "devDependencies": {
-    "unplugin-vue-components": "^0.27.2"
+    "sass": "^1.77.6"
   }
 }

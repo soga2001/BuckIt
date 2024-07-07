@@ -1,12 +1,24 @@
-<script setup lang="ts"></script>
+<script lang="ts">
+
+definePageMeta({
+  auth: true,
+  name: 'confirm'
+})
+
+export default defineComponent({
+  data() {
+    return {
+
+    }
+  },
+
+})
+</script>
 
 <template>
-  <div>
-    Page: index
-  </div>
+  <ion-page>
+    Page: Confirm
+  </ion-page>
 </template>
 
-<style scoped>
-
-
-</style>
+<style scoped></style>

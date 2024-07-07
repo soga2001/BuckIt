@@ -1,42 +1,51 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import Components from 'unplugin-vue-components/vite';
-import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+
   modules: [
     '@nuxtjs/ionic', 
     "@nuxtjs/supabase", 
-    "@ant-design-vue/nuxt"
+    "@ant-design-vue/nuxt",
+    '@pinia/nuxt',
   ],
   ssr: false,
-  vite: {
-    plugins: [
-      Components({
-        // add option {resolveIcons: true} as parameter for resolving problem with icons
-        resolvers: [AntDesignVueResolver({
-          resolveIcons: true,
-          // importStyle: 'css-in-js'
-          importStyle: 'less'
-        })],
-      }),
-    ],
-    ssr: {
-      noExternal: ['moment', 'compute-scroll-into-view', 'ant-design-vue','@ant-design/icons-vue'],
-    },  
+  css: [
+    'ant-design-vue/dist/reset.css',
+    '~/assets/css/global.scss',
+    '~/assets/css/ionic.css'
+  ],
+
+  ionic: {
+    integrations: {
+      // pwa: false,
+      router: true,
+    },
   },
+
+  vite: {
+    resolve: {
+      alias: {
+        'ant-design-vue/dist': 'ant-design-vue/dist',
+        'ant-design-vue/es': 'ant-design-vue/es',
+        'ant-design-vue/lib': 'ant-design-vue/es',
+        'ant-design-vue': 'ant-design-vue/es',
+      },
+    },
+  },
+
   supabase: {
     // Options
     redirectOptions: {
       login: '/login',
       callback: '/confirm',
       include: undefined,
-      exclude: [],
+      exclude: ['/register'],
       cookieRedirect: false,
     },
     cookieOptions: {
-      maxAge: 60 * 60 * 8,
+      maxAge: 60 * 60 * 24 * 10,
       sameSite: 'lax',
       secure: true
     },
@@ -48,5 +57,15 @@ export default defineNuxtConfig({
         autoRefreshToken: true
       },
     }    
-  }
+  },
+
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
+
+  experimental:{
+    payloadExtraction: false
+  },
+
+  compatibilityDate: '2024-07-05'
 })

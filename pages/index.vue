@@ -1,9 +1,30 @@
-<script setup lang="ts"></script>
+<script lang="ts">
+
+definePageMeta({
+  auth: true,
+  name: 'Home'
+})
+
+useSeoMeta({
+  title: 'Home',
+  description: 'This is the home page',
+
+})
+
+export default defineComponent({
+  data() {
+    return {
+
+    }
+  },
+
+})
+</script>
 
 <template>
-  <div>
+  <ion-page>
     Page: index
-  </div>
+  </ion-page>
 </template>
 
 <style scoped></style>
