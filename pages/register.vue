@@ -1,8 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { IonIcon } from '@ionic/vue';
-import { atOutline, lockClosedOutline, eyeOutline, eyeOffOutline } from 'ionicons/icons';
+
 import type {User} from '~/assets/interface/user.ts'
 import {useStore} from '~/stores/myStore'
 
@@ -14,7 +13,6 @@ definePageMeta({
 useSeoMeta({
   title: 'Register',
   description: 'This is the registration page',
-  
 })
 
 export default defineComponent({
@@ -44,9 +42,18 @@ export default defineComponent({
           email: this.email,
           password: this.password,
         })
+        
+        // const response: {error?: string, authenticated?: boolean, user?: User} = await $fetch('/api/login', {
+        //     method: "POST",
+        //     body: {
+        //         email: this.email,
+        //         password: this.password
+        //     }
+        // })
 
         if (error) {
           this.error = error.message
+          // console.log(error)
         } else {
           this.store.setUser(session?.user as User)
           this.store.changeAuthenticated(true)
@@ -79,7 +86,7 @@ export default defineComponent({
                           <label>Password </label>
                         </div>
 
-                        <ion-input placeholder="Enter your password" :type="isPassword ? 'password' : 'text'">
+                        <ion-input placeholder="Enter your password" v-model="password" :type="isPassword ? 'password' : 'text'">
                           <ion-icon slot="start" :icon="ioniconsLockClosed" aria-hidden="true"></ion-icon>
                           <ion-button fill="clear" slot="end" aria-label="Show/hide" @click="isPassword = !isPassword">
                             <ion-icon slot="icon-only" :icon="isPassword ? ioniconsEyeOutline : ioniconsEyeOffOutline" aria-hidden="true"></ion-icon>
@@ -91,8 +98,8 @@ export default defineComponent({
                         </div>
                         <span class="span">Forgot password?</span>
                         </div>
-                        <input class="button-submit" type="submit" value="Sign In"/>
-                        <p class="p">Don't have an account? <span class="span">Sign Up</span>
+                        <input class="button-submit" type="submit" value="Sign Up"/>
+                        <p class="p">Already have an account? <span class="span">Sign In</span>
 
                         </p><p class="p line">Or With</p>
 
@@ -135,14 +142,14 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    /* background-color: #f4f4f4; */
 }
 
 .title {
-    color: #151717;
+    /* color: #151717; */
     font-size: 30px;
     font-weight: 600;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgb(255, 255, 255);
     margin-bottom: 10px;
 }
 
@@ -151,7 +158,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   padding: 30px;
   width: 450px;
   border-radius: 20px;
@@ -167,7 +174,7 @@ export default defineComponent({
 }
 
 .flex-column > label {
-  color: #151717;
+  /* color: #151717; */
   font-weight: 600;
 }
 
@@ -208,7 +215,7 @@ export default defineComponent({
 
 .flex-row > div > label {
   font-size: 14px;
-  color: black;
+  /* color: black; */
   font-weight: 400;
 }
 
@@ -229,7 +236,7 @@ input[type="checkbox"] {
   margin: 20px 0 10px 0;
   background-color: #151717;
   border: none;
-  color: white !important;
+  /* color: white !important; */
   font-size: 15px;
   font-weight: 500;
   border-radius: 10px;
@@ -244,7 +251,7 @@ input[type="checkbox"] {
 
 .p {
   text-align: center;
-  color: black;
+  /* color: black; */
   font-size: 14px;
   margin: 5px 0;
 }
@@ -261,7 +268,7 @@ input[type="checkbox"] {
   gap: 10px;
   border: 1px solid #ededef;
   background-color: transparent;
-  color: black;
+  /* color: black; */
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }

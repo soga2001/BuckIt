@@ -18,6 +18,7 @@ export default defineComponent({
     const supabase = useSupabaseClient()
     const store = useStore()
     return { enterOutline, exitOutline, createOutline, homeOutline, eyeOffOutline, store, supabase}
+
   },
   methods: {
     async logout() {
@@ -56,9 +57,8 @@ export default defineComponent({
 <template>
   <ion-app>
 
-     <ion-content>
-      
-      <!-- <ion-router-outlet /> -->
+     <ion-content :fullscreen="true">
+    
       <ion-tabs>
         <ion-router-outlet />
         
@@ -77,13 +77,6 @@ export default defineComponent({
               <ion-icon :icon="ioniconsCreateOutline" />
               <ion-label>Register</ion-label>
             </ion-tab-button> 
-            
-             <!-- <ion-tab-button tab="schedule" href="/tabs/schedule">
-              <ion-icon :icon="ioniconsAccessibility" aria-hidden="true"></ion-icon>
-              <ion-label>Schedule</ion-label>
-            </ion-tab-button> -->
-
-
 
             <!-- <NuxtLink to="/" class="nav-link" exactActiveClass="active" v-if="store.isAuthenticated">
               <ion-item>
@@ -129,10 +122,6 @@ export default defineComponent({
             
         </ion-tab-bar>
       </ion-tabs>
-      
-      <!-- <NuxtLayout>
-        <nuxt-page />
-      </NuxtLayout> -->
     </ion-content>
   </ion-app>
 </template>

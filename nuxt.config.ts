@@ -33,6 +33,14 @@ export default defineNuxtConfig({
         'ant-design-vue': 'ant-design-vue/es',
       },
     },
+    css: {
+      preprocessorOptions: {
+          sass: {
+              additionalData: '@import "@/assets/css/global.scss"',
+
+          },
+      },
+    },
   },
 
   supabase: {

@@ -46,7 +46,9 @@
 	--ion-background-color-step-900: #e6e6e6;
 	--ion-background-color-step-950: #f2f2f2;
 
-	--ion-color-primary: rgb(255, 0, 255);
+	--ion-tab-bar-color-selected: #ff00ff;
+
+	--ion-color-primary: #ff00ff;
 	--ion-color-primary-rgb: 255,0,255;
 	--ion-color-primary-contrast: #000000;
 	--ion-color-primary-contrast-rgb: 0,0,0;
@@ -125,4 +127,9 @@
 
   ion-icons {
     color: white;
+  }
+
+
+  .--color-selected {
+	color: var(--ion-color-primary) !important;
   }

@@ -29,6 +29,8 @@ export default defineComponent({
 
       isPassword: true,
 
+      disabled: true,
+
 
     }
   },
@@ -144,14 +146,14 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    /* background-color: #f4f4f4; */
 }
 
 .title {
-    color: #151717;
+    /* color: #151717; */
     font-size: 30px;
     font-weight: 600;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgb(255, 255, 255);
     margin-bottom: 10px;
 }
 
@@ -160,7 +162,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   padding: 30px;
   width: 450px;
   border-radius: 20px;
@@ -176,7 +178,7 @@ export default defineComponent({
 }
 
 .flex-column > label {
-  color: #151717;
+  /* color: #151717; */
   font-weight: 600;
 }
 
@@ -217,7 +219,7 @@ export default defineComponent({
 
 .flex-row > div > label {
   font-size: 14px;
-  color: black;
+  /* color: black; */
   font-weight: 400;
 }
 
@@ -238,7 +240,7 @@ input[type="checkbox"] {
   margin: 20px 0 10px 0;
   background-color: #151717;
   border: none;
-  color: white !important;
+  /* color: white !important; */
   font-size: 15px;
   font-weight: 500;
   border-radius: 10px;
@@ -253,7 +255,7 @@ input[type="checkbox"] {
 
 .p {
   text-align: center;
-  color: black;
+  /* color: black; */
   font-size: 14px;
   margin: 5px 0;
 }
@@ -270,7 +272,7 @@ input[type="checkbox"] {
   gap: 10px;
   border: 1px solid #ededef;
   background-color: transparent;
-  color: black;
+  /* color: black; */
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
