@@ -34,24 +34,10 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
-    const supabase = useSupabaseClient()
-    return {store, supabase}
+    return {store}
   },
   methods: {
     async login() {
-
-        const { data: { session }, error } = await this.supabase.auth.signInWithPassword({
-          email: this.email,
-          password: this.password,
-        })
-
-        if (error) {
-          this.error = error.message
-        } else {
-          this.store.setUser(session?.user as User)
-          this.store.changeAuthenticated(true)
-          navigateTo(this.$route.redirectedFrom?.fullPath || '/')
-        }
 
         
 
