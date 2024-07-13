@@ -6,7 +6,6 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxtjs/ionic', 
-    "@nuxtjs/supabase", 
     "@ant-design-vue/nuxt",
     '@pinia/nuxt',
   ],
