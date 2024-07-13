@@ -15,34 +15,16 @@ export default defineComponent({
     }
   },
   setup() {
-    const supabase = useSupabaseClient()
     const store = useStore()
-    return { enterOutline, exitOutline, createOutline, homeOutline, eyeOffOutline, store, supabase}
+    return { enterOutline, exitOutline, createOutline, homeOutline, eyeOffOutline, store}
   },
   methods: {
     async logout() {
 
-      const { error } = await this.supabase.auth.signOut();
-
-      // const response: {error?: string, authenticated?: boolean} = await $fetch('/api/logout', {
-      //   method: "POST",
-      // })
-
-      if(error) {
-        console.log(error?.message)
-      }
-      else {
-        this.store.setUser({} as User)
-        this.store.changeAuthenticated(false)
-      }
+    
     }
   },
   created() {
-    const user = useSupabaseUser();
-    if(user.value) {
-      this.store.setUser(user.value as User)
-      this.store.changeAuthenticated(true)
-    }
   },
   mounted() {
     // this.$nextTick()

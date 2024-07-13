@@ -35,30 +35,6 @@ export default defineNuxtConfig({
     },
   },
 
-  supabase: {
-    // Options
-    redirectOptions: {
-      login: '/login',
-      callback: '/confirm',
-      include: undefined,
-      exclude: ['/register'],
-      cookieRedirect: false,
-    },
-    cookieOptions: {
-      maxAge: 60 * 60 * 24 * 10,
-      sameSite: 'lax',
-      secure: true
-    },
-    clientOptions: {
-      auth: {
-        flowType: 'pkce',
-        detectSessionInUrl: true,
-        persistSession: true,
-        autoRefreshToken: true
-      },
-    }    
-  },
-
   pinia: {
     storesDirs: ['./stores/**'],
   },

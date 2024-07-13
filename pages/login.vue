@@ -34,16 +34,16 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
-    const supabase = useSupabaseClient()
-    return {store, supabase}
+    // const supabase = useSupabaseClient()
+    return {store}
   },
   methods: {
     async login() {
 
-        const { data: { session }, error } = await this.supabase.auth.signInWithPassword({
-          email: this.email,
-          password: this.password,
-        })
+        // const { data: { session }, error } = await this.supabase.auth.signInWithPassword({
+        //   email: this.email,
+        //   password: this.password,
+        // })
         
         // const response: {error?: string, authenticated?: boolean, user?: User} = await $fetch('/api/login', {
         //     method: "POST",
@@ -53,14 +53,14 @@ export default defineComponent({
         //     }
         // })
 
-        if (error) {
-          this.error = error.message
-          // console.log(error)
-        } else {
-          this.store.setUser(session?.user as User)
-          this.store.changeAuthenticated(true)
-          navigateTo(this.$route.redirectedFrom?.fullPath || '/')
-        }
+        // if (error) {
+        //   this.error = error.message
+        //   // console.log(error)
+        // } else {
+        //   this.store.setUser(session?.user as User)
+        //   this.store.changeAuthenticated(true)
+        //   navigateTo(this.$route.redirectedFrom?.fullPath || '/')
+        // }
 
         
 
