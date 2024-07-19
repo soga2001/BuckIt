@@ -9,7 +9,7 @@ export default defineComponent({
 <template>
   <div class="main">
     <div>
-      Hello
+      Layout
     </div>
     <slot> </slot> 
   </div>

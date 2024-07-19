@@ -1,16 +1,49 @@
 <script lang="ts">
 
+import { defineComponent, ref } from 'vue'
+
+import {useStore} from '~/stores/store'
+import type {User} from '@/assets/interface/user';
+
 export default defineComponent({
   data() {
     return {
       isDesktop: true,
       current: 0,
+      dropdown: [
+        { name: 'Settings & Privacy', icon: ioniconsSettingsOutline, routerLink: '/settings' },
+        // { name: 'Discover', icon: 'pi pi-compass', routerLink: '/discover' },
+        { name: 'Logout', icon: ioniconsExitOutline, action: () => {this.logout()} }
+      ],
+      menu: ref(),
     }
+  },
+  setup() {
+    const store = useStore();
+    const supabase = useSupabaseClient();
+    return {store, supabase}
   },
   methods: {
     async checkIfDesktop() {
       this.isDesktop = window.innerWidth > 768
     },
+    toggle(event: Event) {
+      (this.$refs.menu as any).toggle(event)
+    },
+    async logout() {
+
+      console.log('here')
+      const { error } = await this.supabase.auth.signOut();
+
+
+      if(error) {
+        console.log(error?.message)
+      }
+      else {
+        this.store.setUser({} as User)
+        this.store.changeAuthenticated(false)
+      }
+    }
   }
 })
 </script>
@@ -22,17 +55,25 @@ export default defineComponent({
       <ion-tabs>
         <ion-router-outlet />
         
-        <ion-tab-bar :slot="isDesktop ? 'top' : 'bottom'">
-          <div class="tabs-left">
+        <ion-tab-bar class="flex flex-row w-full" :slot="isDesktop ? 'top' : 'bottom'">
+          <div class="tabs-left flex-none basis-1/3">
             <div>
-              Brand
+              <!-- <Button class="p-0 m-0 bg-none"  severity="info" rounded  aria-haspopup="true" aria-controls="overlay_menu">
+                
+              </Button> -->
+              <!-- <ion-button class="!p-0 !m-0" clear shape="round">
+                <ion-icon size="large" :icon="ioniconsLogoBitbucket" />
+              </ion-button> -->
+              <ion-button shape="round">
+                <ion-icon slot="icon-only" :icon="ioniconsHeart"></ion-icon>
+              </ion-button>
             </div>
             <div>
               <ion-searchbar color="medium" animated show-clear-button="focus" placeholder="Search BuckIt"></ion-searchbar>
             </div>
           </div>
 
-          <div class="tabs-center">
+          <div class="tabs-center grow basis-1/3 md:basis-1/2">
 
             <ion-tab-button tab="home" href="/home">
               <ion-icon :icon="ioniconsHomeOutline" />
@@ -44,14 +85,44 @@ export default defineComponent({
               <!-- <ion-label>Discover</ion-label> -->
             </ion-tab-button>
 
-            <ion-tab-button tab="login" href="/login">
-              <ion-icon :icon="ioniconsAccessibilityOutline" />
-              <!-- <ion-label>Login</ion-label> -->
-            </ion-tab-button>
           </div>
 
-          <div class="tabs-right">
-            Brand
+          <div class="tabs-right flex-none flex gap-2 basis-1/3">
+
+            <Button class="p-0 m-0 bg-none"  severity="info" rounded outlined   aria-haspopup="true" aria-controls="overlay_menu">
+              <ion-icon size="large" :icon="ioniconsNotificationsCircle" />
+              <!-- <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" /> -->
+            </Button>
+
+
+            <Button class="p-0 m-0"  severity="info" rounded outlined  @click="toggle" aria-haspopup="true" aria-controls="overlay_menu">
+              <ion-icon size="large" :icon="ioniconsPersonCircleOutline" />
+              <!-- <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" /> -->
+            </Button>
+            <Menu ref="menu" id="overlay_menu" :model="dropdown" :popup="true">
+              <template #start>
+                <button @click="navigateTo('/profile')" v-ripple class="relative overflow-hidden w-full p-link flex items-center p-2 pl-3 text-surface-700 dark:text-surface-0/80 hover:bg-surface-200 dark:hover:bg-surface-600 rounded-none">
+                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" class="mr-2" shape="circle" />
+                    <span class="inline-flex flex-col justify-start">
+                        <span class="font-bold text-left">Amy Elsner</span>
+                        <span class="text-sm text-left"></span>
+                    </span>
+                </button>
+              </template>
+              <template #item="{ item, props }">
+                  <a v-ripple class="flex items-center" v-bind="props.action" @click="item.action">
+                      <!-- <span :class="item.icon" /> -->
+                      <ion-icon :icon="item.icon" />
+                      <span class="ml-2">{{ item.name }}</span>
+                      <Badge v-if="item.badge" class="ml-auto" :value="item.badge" />
+                      <span v-if="item.shortcut" class="ml-auto border border-surface-200 dark:border-surface-700 rounded-md bg-surface-100 dark:bg-surface-700 text-xs p-1">{{ item.shortcut }}</span>
+                  </a>
+                  <!-- Hello -->
+              </template>
+            </Menu>
+
+            
+
           </div>
         </ion-tab-bar>
       </ion-tabs>
@@ -59,31 +130,34 @@ export default defineComponent({
   </ion-page>
 </template>
 
-<style scoped>
+<style scoped lang="scss" >
 
 ion-tab-bar {
-  display: grid;
-  grid-template-columns: 400px 1fr 400px;
+  /* display: grid;
+  grid-template-columns: minmax(100px, 300px) 1fr minmax(100px, 300px); */
   width: 100%;
   --background: var(--ion-color-dark);
   --color-selected: var(--ion-color-primary);
   --color: var(--ion-color-light);
+}
 
-  /* display: flex; */
-  /* justify-content: right; */
+ion-icon {
+  font-size: 1.8rem;
 }
 
 .tabs-left {
   padding-left: 10px;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   gap: 10px;
 }
 
 ion-searchbar {
   --border-radius: 20px;
-  text-align: left
+  text-align: left;
+  padding: 0;
+  margin: 0;
 
 }
 
@@ -96,6 +170,8 @@ ion-searchbar {
 
 .tabs-right {
   padding-right: 10px;
+  display: flex;
+  justify-content: end;
 }
 
 </style>

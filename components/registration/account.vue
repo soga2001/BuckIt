@@ -17,7 +17,6 @@ export default defineComponent({
 <template>
     <div class="main">
         <div>
-
           <form class="form" ref="loginForm" @submit.prevent="">
             <div class="title">
                 <h1>Account Information</h1>

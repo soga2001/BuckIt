@@ -1,11 +1,24 @@
 :root {
+
+	/* ionic css */
     --ion-color-primary: #ff00ff;
 	--ion-color-primary-rgb: 255,0,255;
 	--ion-color-primary-contrast: #000000;
 	--ion-color-primary-contrast-rgb: 0,0,0;
 	--ion-color-primary-shade: #e000e0;
+	--ion-color-primary-shade-rgb: 224,0,224;
 	--ion-color-primary-tint: #ff1aff;
+
+
+
+
+	/* primevue css */
+	--p-stepper-step-title-active-color: #ff00ff;
+	--p-stepper-step-number-active-color: #ff00ff;
+	--p-stepper-separator-active-background: #ff00ff;
+	--p-stepper-step-number-active-border-color: #ff00ff;
+
+	--p-inputtext-focus-border-color: var(--ion-color-primary) !important;
   
-    /* And so on... */
   }
   

@@ -21,14 +21,16 @@ export default defineComponent({
 
 <template>
     <ion-page>
-      <ion-header>
-        <ion-toolbar color="dark">
-          <ion-title>Home</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content color="dark">
-        Home Content
-      </ion-content>
+      <NuxtLayout name="home-layout">
+        <ion-header>
+          <ion-toolbar color="dark">
+            <ion-title>Home</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content color="dark">
+          Home Content
+        </ion-content>
+      </NuxtLayout>
     </ion-page>
 </template>
   

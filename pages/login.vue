@@ -113,9 +113,12 @@ export default defineComponent({
             <span class="span">Forgot password?</span>
             </div>
             <input class="button-submit" type="submit" value="Sign In"/>
-            <p class="p">Don't have an account? <span class="span">Sign Up</span>
-
-            </p><p class="p line">Or With</p>
+            <p class="flex justify-center items-center">Don't have an account? 
+              <span class="span">
+                  <ion-button href="/register" fill="clear">Sign In</ion-button>
+              </span>
+            </p>
+            <p class="p line">Or With</p>
 
             <div class="flex-row">
               <button class="btn google">

@@ -1,15 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
+import Aura from '@primevue/themes/aura';
+
+// import 'primeicons/primeicons.css'
+
+
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  modules: [
-    '@nuxtjs/ionic', 
-    "@nuxtjs/supabase", 
-    // "@ant-design-vue/nuxt",
-    '@pinia/nuxt',
-  ],
+  modules: ['@nuxtjs/ionic', "@nuxtjs/supabase", // "@ant-design-vue/nuxt",
+  '@pinia/nuxt', '@primevue/nuxt-module', "@nuxtjs/tailwindcss"],
   ssr: false,
   css: [
     'ant-design-vue/dist/reset.css',
@@ -41,6 +42,13 @@ export default defineNuxtConfig({
           },
       },
     },
+  },
+  primevue: {
+    options: {
+        theme: {
+            preset: Aura
+        }
+    }
   },
 
   supabase: {
