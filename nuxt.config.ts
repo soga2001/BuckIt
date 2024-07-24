@@ -1,7 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import Aura from '@primevue/themes/aura';
-
 // import 'primeicons/primeicons.css'
 
 
@@ -10,28 +8,21 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    '@nuxtjs/ionic', 
     "@nuxtjs/supabase",
-    '@pinia/nuxt', 
-    '@primevue/nuxt-module', 
+    '@pinia/nuxt',
     "@nuxtjs/tailwindcss",
     '@nuxtjs/device',
+    "nuxt-quasar-ui"
   ],
   device: {
     refreshOnResize: true
   },
   ssr: false,
   css: [
-    'ant-design-vue/dist/reset.css',
+    // 'ant-design-vue/dist/reset.css',
     '~/assets/styles/global.scss',
     '~/assets/styles/ionic.css'
   ],
-  ionic: {
-    integrations: {
-      // pwa: false,
-      router: true,
-    },
-  },
 
   vite: {
     // resolve: {
@@ -51,16 +42,10 @@ export default defineNuxtConfig({
       },
     },
   },
-  primevue: {
-    options: {
-        theme: {
-            preset: Aura
-        }
-    }
-  },
 
   supabase: {
-    // Options
+    // Options\
+    redirect: false,
     redirectOptions: {
       login: '/login',
       callback: '/confirm',
