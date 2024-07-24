@@ -9,8 +9,9 @@ definePageMeta({
   name: "profile",
 })
 
+
 useSeoMeta({
-  title: 'Disover',
+  title: " Profile",
   description: 'This is the discover page',
 })
 
@@ -62,7 +63,7 @@ export default defineComponent({
   watch: {
     "$route"(value) {
       // this.getUser()
-      console.log(value)
+      this.username = this.$route.params.username
     },
     username(value) {
       this.getUser()
@@ -74,14 +75,6 @@ export default defineComponent({
   //     userData.value = await fetchUser(to.params.id)
   //   }
   // })
-  beforeRouteUpdate(to, from, next) {
-    // only fetch the user if the id changed as maybe only the query or the hash changed
-    if (to.params.username !== from.params.username) {
-      this.username = to.params.username
-      this.getUser()
-    }
-  
-  }
 })
 </script>
 
