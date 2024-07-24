@@ -8,6 +8,7 @@ export const useStore = defineStore({
     return {
       authenticated: false,
       user: {} as User,
+      desktop: true,
     }
   },
   actions: {
@@ -19,9 +20,14 @@ export const useStore = defineStore({
     },
     removeUser() {
         this.user = {} as User
+    },
+    changeDevice(value: boolean) {
+        this.desktop = value
     }
   },
   getters: {
     isAuthenticated: (state) => state.authenticated,
+    getUser: (state) => state.user,
+    isDesktop: (state) => state.desktop
   },
 })

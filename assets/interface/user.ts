@@ -11,13 +11,20 @@ export interface User {
     //     provider: string,
     //     providers: string[]
     // },
-    user_metadata: {},
-    // identities: {
-    //     provider: string,
-    //     connection: string,
-    //     isSocial: boolean
-    // }[],
+    user_metadata?: UserMetaData,
     created_at: string,
     updated_at: string,
     is_anonymous: boolean
+}
+
+
+export interface UserMetaData {
+    id: string,
+    fullname: string,
+    username: string,
+    avatar: string,
+    bio: string,
+    website: string,
+    location: string,
+    dob: string,
 }

@@ -4,9 +4,9 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
     const user = useSupabaseUser()
 
-    // const store = useStore()
     
     if(user.value &&  to.meta.auth == false) {
+        console.log('redirecting to home')
         return navigateTo(to.redirectedFrom?.fullPath) || navigateTo('/home')
     }
     else if(!user.value && to.meta.auth == true) {

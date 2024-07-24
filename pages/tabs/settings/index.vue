@@ -1,7 +1,8 @@
 <script lang="ts">
 
 definePageMeta({
-  alias: ['/search']
+  // alias: ['/settings'],
+  path: '/settings',
 })
 
 useSeoMeta({

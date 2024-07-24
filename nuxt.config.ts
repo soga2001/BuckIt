@@ -9,15 +9,23 @@ import Aura from '@primevue/themes/aura';
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  modules: ['@nuxtjs/ionic', "@nuxtjs/supabase", // "@ant-design-vue/nuxt",
-  '@pinia/nuxt', '@primevue/nuxt-module', "@nuxtjs/tailwindcss"],
+  modules: [
+    '@nuxtjs/ionic', 
+    "@nuxtjs/supabase",
+    '@pinia/nuxt', 
+    '@primevue/nuxt-module', 
+    "@nuxtjs/tailwindcss",
+    '@nuxtjs/device',
+  ],
+  device: {
+    refreshOnResize: true
+  },
   ssr: false,
   css: [
     'ant-design-vue/dist/reset.css',
     '~/assets/styles/global.scss',
     '~/assets/styles/ionic.css'
   ],
-
   ionic: {
     integrations: {
       // pwa: false,
@@ -57,7 +65,7 @@ export default defineNuxtConfig({
       login: '/login',
       callback: '/confirm',
       include: undefined,
-      exclude: ['/register', '/testing'],
+      exclude: ['/register'],
       cookieRedirect: false,
     },
     cookieOptions: {
@@ -78,7 +86,6 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ['./stores/**'],
   },
-
   experimental:{
     payloadExtraction: false
   },

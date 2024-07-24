@@ -20,5 +20,16 @@
 
 	--p-inputtext-focus-border-color: var(--ion-color-primary) !important;
   
-  }
+
+
+}
   
+
+.native-textarea::-webkit-scrollbar {
+	display: none;
+}
+
+ion-input.has-focus ion-icon {
+    color: var(--ion-color-primary);
+      
+}

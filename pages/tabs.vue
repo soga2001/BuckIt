@@ -4,6 +4,7 @@ import { defineComponent, ref } from 'vue'
 
 import {useStore} from '~/stores/store'
 import type {User} from '@/assets/interface/user';
+import { useSupabaseUser } from '#imports';
 
 export default defineComponent({
   data() {
@@ -25,7 +26,8 @@ export default defineComponent({
   },
   methods: {
     async checkIfDesktop() {
-      this.isDesktop = window.innerWidth > 768
+      this.store.changeDevice(this.$device.isDesktop as boolean)
+
     },
     toggle(event: Event) {
       (this.$refs.menu as any).toggle(event)
@@ -44,6 +46,14 @@ export default defineComponent({
         this.store.changeAuthenticated(false)
       }
     }
+  },
+  mounted() {
+    this.checkIfDesktop()
+    window.addEventListener('resize', this.checkIfDesktop)
+  },
+  beforeMount() {
+    const user = useSupabaseUser()
+    this.store.setUser(user.value as User)
   }
 })
 </script>
@@ -55,15 +65,9 @@ export default defineComponent({
       <ion-tabs>
         <ion-router-outlet />
         
-        <ion-tab-bar class="flex flex-row w-full" :slot="isDesktop ? 'top' : 'bottom'">
+        <ion-tab-bar class="flex flex-row w-full" :slot="store.desktop ? 'top' : 'bottom'">
           <div class="tabs-left flex-none basis-1/3">
             <div>
-              <!-- <Button class="p-0 m-0 bg-none"  severity="info" rounded  aria-haspopup="true" aria-controls="overlay_menu">
-                
-              </Button> -->
-              <!-- <ion-button class="!p-0 !m-0" clear shape="round">
-                <ion-icon size="large" :icon="ioniconsLogoBitbucket" />
-              </ion-button> -->
               <ion-button shape="round">
                 <ion-icon slot="icon-only" :icon="ioniconsHeart"></ion-icon>
               </ion-button>
@@ -99,13 +103,15 @@ export default defineComponent({
               <ion-icon size="large" :icon="ioniconsPersonCircleOutline" />
               <!-- <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" /> -->
             </Button>
-            <Menu ref="menu" id="overlay_menu" :model="dropdown" :popup="true">
+            <Menu ref="menu" id="overlay_menu" :model="dropdown" :popup="true" >
               <template #start>
-                <button @click="navigateTo('/profile')" v-ripple class="relative overflow-hidden w-full p-link flex items-center p-2 pl-3 text-surface-700 dark:text-surface-0/80 hover:bg-surface-200 dark:hover:bg-surface-600 rounded-none">
-                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" class="mr-2" shape="circle" />
+                <!-- @click.stop="$router.push({name: 'profile', params: {username: store.user.user_metadata?.username}})" -->
+                <button @click="$router.push(`/user/${store.user.user_metadata?.username}`)" v-ripple class="relative overflow-hidden w-full p-link flex items-center p-2 pl-3 text-surface-700 dark:text-surface-0/80 hover:bg-surface-200 dark:hover:bg-surface-600 rounded-none">
+                  <Avatar v-if="store.user.user_metadata?.avatar == null" :image="store.user.user_metadata?.avatar" class="mr-2" shape="circle" />  
+                  <Avatar v-else image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" class="mr-2" shape="circle" />
                     <span class="inline-flex flex-col justify-start">
-                        <span class="font-bold text-left">Amy Elsner</span>
-                        <span class="text-sm text-left"></span>
+                        <span class="font-bold text-left">{{ store.user.user_metadata?.fullname }}</span>
+                        <span class="text-sm text-left">@{{ store.user.user_metadata?.username }}</span>
                     </span>
                 </button>
               </template>
