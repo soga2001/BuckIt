@@ -29,7 +29,7 @@ export default defineComponent({
             if(error) {
                 console.log(error)
             } else {
-                this.store.setUser(session?.user as User)
+                this.store.setUser((session?.user as unknown) as User)
                 this.store.changeAuthenticated(true)
                 navigateTo(this.$route.redirectedFrom?.fullPath || '/')
             }

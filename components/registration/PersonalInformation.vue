@@ -1,15 +1,54 @@
 <script lang="ts">
 
 export default defineComponent( {
+    props: {
+        fullnameProp: {
+            type: String,
+            required: false,
+            default: ""
+        },
+        usernameProp: {
+            type: String,
+            required: false,
+            default: ""
+        },
+        phoneProp: {
+            type: String,
+            required: false,
+            default: ""
+        },
+        monthProp: {
+            type: String,
+            required: false,
+            default: ""
+        },
+        dayProp: {
+            type: [String, Number],
+            required: false,
+            default: ""
+        },
+        yearProp: {
+            type: [String, Number],
+            required: false,
+            default: ""
+        },
+        bioProp: {
+            type: String,
+            required: false,
+            default: ""
+        }
+
+    },
     data() {
         return {
-            fullname: "",
-            username: "",
-            phone: "",
-            month: "",
-            day: "",
-            year: "",
-            bio: "",
+            fullname: this.fullnameProp,
+            username: this.usernameProp,
+            phone: this.phoneProp,
+            month: this.monthProp,
+            day: this.dayProp,
+            year: this.yearProp,
+            bio: this.bioProp,
+
             
             dayList: Array.from({length: 31}, (_, i) => i + 1),
             yearList: Array.from({length: 100}, (_, i) => new Date().getFullYear() - i),
@@ -74,14 +113,19 @@ export default defineComponent( {
         year() {
             if(this.month && this.year) {
 
-                const tempDay = new Date(parseInt(this.year), parseInt(this.monthMap[this.month]), 0).getDate();
+                const parsedYear = typeof this.year === 'string' ? parseInt(this.year) : this.year;
 
-                if((this.currentMonth < parseInt(this.monthMap[this.month])) && (this.currentYear == parseInt(this.year))) {
+                const tempDay = new Date(parsedYear, parseInt(this.monthMap[this.month]), 0).getDate();
+
+                if((this.currentMonth < parseInt(this.monthMap[this.month])) && (this.currentYear == parsedYear)) {
                 this.month = '';
                 }
 
                 this.dayList = Array<number>(tempDay).fill(0).map((_, i) => i + 1);
-                if(parseInt(this.day) > tempDay) {
+
+                const parsedDay = typeof this.day === 'string' ? parseInt(this.day) : this.day;
+
+                if(parsedDay > tempDay) {
                 this.day = '';
                 }
             }
@@ -95,6 +139,14 @@ export default defineComponent( {
         },
         bio() {
             this.$emit('update:bio', this.bio)
+        }
+    },
+    computed: {
+        computedYear() {
+            return typeof this.year === 'string' ? parseInt(this.year) : this.year;
+        },
+        computedDay() {
+            return typeof this.day === 'string' ? parseInt(this.day) : this.day;
         }
     }
 })
@@ -172,7 +224,7 @@ export default defineComponent( {
                     <div class="custom-select">
                     <select class="dob-select" v-model="month" name="month" id="month">
                         <option class="italic" value="" disabled selected>Select Month</option>
-                        <option :class="{active: month == m, option: true }" v-for="(m, index) in monthsList" :key="m" :value="m" :disabled="((currentMonth < index + 1) && (currentYear == parseInt(year)))">{{m}}</option>
+                        <option :class="{active: month == m, option: true }" v-for="(m, index) in monthsList" :key="m" :value="m" :disabled="((currentMonth < index + 1) && (currentYear == computedYear))">{{m}}</option>
                     </select>
                     </div>
 
@@ -183,7 +235,7 @@ export default defineComponent( {
                     <div class="custom-select">
                     <select class="dob-select" v-model="day" placeholder="Select a day" name="day" id="day">
                         <option class="italic" value="" disabled selected>Select Day</option>
-                        <option :class="{active: parseInt(day) == m, option: true }" v-for="m in dayList" :key="m" :value="m" :disabled="((currentMonth == parseInt(monthMap[month])) && currentYear == parseInt(year) ) && (todayDate < m)">{{m}} </option>
+                        <option :class="{active: computedDay == m, option: true }" v-for="m in dayList" :key="m" :value="m" :disabled="((currentMonth == parseInt(monthMap[month])) && currentYear == computedYear ) && (todayDate < m)">{{m}} </option>
                     </select>
 
                     </div>
@@ -194,7 +246,7 @@ export default defineComponent( {
                     <div class="custom-select">
                     <select class="dob-select" v-model="year" placeholder="Select a year" name="year" id="year">
                         <option class="italic" value="" disabled selected>Select Year</option>
-                        <option :class="{active: parseInt(year) == m, option: true }" v-for="m in yearList" :key="m" :value="m">{{m}}</option>
+                        <option :class="{active: computedYear  == m, option: true }" v-for="m in yearList" :key="m" :value="m">{{m}}</option>
                     </select>
                     </div>
                 </div>

@@ -4,30 +4,47 @@ import { defineComponent } from 'vue'
 import { useStore } from '~/stores/store'
 
 export default defineComponent({
-    data() {
-        return {
-            email: "",
-            password: "",
-            confirmPassword: "",
-            togglePassword: true,
-            toggleConfirmPassword: true,
-        }
+  props: {
+    emailProp: {
+      type: String,
+      required: false,
+      default: ""
     },
-    methods: {
+    passwordProp: {
+      type: String,
+      required: false,
+      default: ""
+    },
+    confirmPassProp: {
+      type: String,
+      required: false,
+      default: ""
+    }
+  },
+  data() {
+      return {
+          email: this.emailProp,
+          password: this.passwordProp,
+          confirmPassword: this.confirmPassProp,
+          togglePassword: true,
+          toggleConfirmPassword: true,
+      }
+  },
+  methods: {
 
+  },
+  watch: {
+    email() {
+      this.$emit('update:email', this.email)
     },
-    watch: {
-      email() {
-        this.$emit('update:email', this.email)
-      },
-      password() {
-        this.$emit('update:password', this.password)
-      },
-      confirmPassword() {
-        this.$emit('update:confirmPassword', this.confirmPassword)
-      },
+    password() {
+      this.$emit('update:password', this.password)
+    },
+    confirmPassword() {
+      this.$emit('update:confirmPassword', this.confirmPassword)
+    },
 
-    },
+  },
 })
 </script>
 
@@ -57,13 +74,6 @@ export default defineComponent({
             <label>Password </label>
           </div>
 
-
-          <!-- <InputGroup>
-              <InputGroupAddon>
-                <ion-icon :icon="ioniconsLockClosed" aria-hidden="true"></ion-icon>
-              </InputGroupAddon>
-              <Password v-model="password" :feedback="false" placeholder="Enter your password" toggleMask />
-          </InputGroup> -->
           <InputGroup class="input-group">
                 <InputGroupAddon class="input-addon">
                   <ion-icon :icon="ioniconsLockClosed" aria-hidden="true"></ion-icon>

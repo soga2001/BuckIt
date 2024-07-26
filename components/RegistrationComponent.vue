@@ -38,7 +38,7 @@ export default defineComponent({
       phone: '',
       username: '',
       dob: '',
-      bio: null,
+      bio: '',
 
       validEmail: true,
 
@@ -152,7 +152,7 @@ export default defineComponent({
       if(error) {
         console.log(error)
       } else {
-        this.store.setUser(session?.user as User)
+        this.store.setUser((session?.user as unknown) as User)
         this.store.changeAuthenticated(true)
         navigateTo(this.$route.redirectedFrom?.fullPath || '/')
       }
@@ -267,7 +267,7 @@ export default defineComponent({
                 <StepPanel :value="1">
                     <div class="flex flex-col gap-1 mx-auto mt-5" style=" max-width: 600px">
 
-                      <AccountInformation v-model:email="email" v-model:password="password" v-model:confirmPassword="confirmPassword"></AccountInformation>
+                      <AccountInformation :emailProp="email" :passwordProp="password" :confirmPassProp="confirmPassword" v-model:email="email" v-model:password="password" v-model:confirmPassword="confirmPassword"></AccountInformation>
 
                       
                       <div class="flex pt-6 ml-auto">
@@ -281,7 +281,9 @@ export default defineComponent({
                 <StepPanel :value="2">
                     <div class="flex flex-col gap-1 mx-auto mt-5" style=" max-width: 600px">
 
-                      <PersonalInformation v-model:fullname="fullname" v-model:phone="phone" v-model:username="username" v-model:month="month" v-model:day="day" v-model:year="year" v-model:bio="bio"></PersonalInformation>
+                      <PersonalInformation 
+                        :fullnameProp="fullname" :phoneProp="phone" :usernameProp="username" :monthProp="month" :dayProp="day" :yearProp="year" :bioProp="bio"
+                        v-model:fullname="fullname" v-model:phone="phone" v-model:username="username" v-model:month="month" v-model:day="day" v-model:year="year" v-model:bio="bio"></PersonalInformation>
 
 
                       <div class="flex w-full pt-6 justify-between">

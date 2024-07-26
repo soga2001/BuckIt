@@ -50,7 +50,7 @@ export default defineComponent({
           this.error = error.message
           // console.log(error)
         } else {
-          this.store.setUser(session?.user as User)
+          this.store.setUser((session?.user as unknown) as User)
           this.store.changeAuthenticated(true)
           navigateTo(this.$route.redirectedFrom?.fullPath || '/')
         }
