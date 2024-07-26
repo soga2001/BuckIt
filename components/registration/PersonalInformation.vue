@@ -114,11 +114,11 @@ export default defineComponent( {
                 <label>Full Name </label>
                 </div>
 
-                <InputGroup>
-                    <InputGroupAddon>
-                    <ion-icon :icon="ioniconsPersonCircle" aria-hidden="true"></ion-icon>
+                <InputGroup class="input-group">
+                    <InputGroupAddon class="input-addon">
+                        <ion-icon :icon="ioniconsPersonCircle" aria-hidden="true"></ion-icon>
                     </InputGroupAddon>
-                    <InputText type="text" v-model="fullname" placeholder="Enter your full name" />
+                    <InputText class="input" type="text" v-model="fullname" placeholder="Enter your full name" />
                 </InputGroup>
             </div>
 
@@ -128,11 +128,11 @@ export default defineComponent( {
                 <label>Username </label>
                 </div>
 
-                <InputGroup>
-                    <InputGroupAddon>
+                <InputGroup class="input-group">
+                    <InputGroupAddon class="input-addon">
                     <ion-icon :icon="ioniconsPerson" aria-hidden="true"></ion-icon>
                     </InputGroupAddon>
-                    <InputText type="text" v-model="username" placeholder="Enter a username" />
+                    <InputText class="input" type="text" v-model="username" placeholder="Enter a username" />
                 </InputGroup>
 
             </div>
@@ -151,11 +151,11 @@ export default defineComponent( {
                 <ion-input placeholder="Enter phone number" fill="outline" v-model="phone" :clear-input="true">
                 <ion-icon slot="start" :icon="ioniconsCall" aria-hidden="true"></ion-icon>
                 </ion-input> -->
-                <InputGroup>
-                    <InputGroupAddon>
+                <InputGroup class="input-group">
+                    <InputGroupAddon class="input-addon">
                     <ion-icon :icon="ioniconsCall" aria-hidden="true"></ion-icon>
                     </InputGroupAddon>
-                    <InputMask variant="outlined" class="" v-model="phone" mask="(999) 999-9999" placeholder="Enter Phone Number" />
+                    <InputMask  variant="outlined" class="input" v-model="phone" mask="(999) 999-9999" placeholder="Enter Phone Number" />
                 </InputGroup>
             
             </div>
@@ -298,5 +298,10 @@ background-color: transparent;
 .option {
 background-color: #222428;
 
+}
+
+
+ion-icon {
+    font-size: 1.5rem;
 }
 </style>

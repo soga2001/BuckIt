@@ -74,7 +74,7 @@ export default defineComponent({
 
 <template>
     <div>
-
+        <div class="text-center mb-4 text-2xl font-bold">Upload an avatar <span class="italic text-sm">(Optional)</span></div>
         <FileUpload class="w-full" name="demo[]" v-model="file" :showCancelButton="false" :showUploadButton="false" @select="fileChange" @removeUploadedFile="removeFile" :auto="true" accept="image/*" :maxFileSize="1000000">
             <template #header="{ chooseCallback, files }">
             <div class="flex flex-wrap justify-between items-center flex-1 gap-4">
@@ -183,6 +183,10 @@ ion-button {
 
     }
 
+}
+
+ion-icon {
+    font-size: 1.5rem;
 }
 
 </style>
