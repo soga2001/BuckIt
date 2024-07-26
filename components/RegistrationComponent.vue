@@ -11,20 +11,9 @@ import PersonalInformation from '~/components/registration/PersonalInformation.v
 import VerifyAccount from '~/components/registration/VerifyAccount.vue';
 
 
-definePageMeta({
-  name: 'register',
-  alias: '/register',
-  auth: false,
-  layout: 'auth-layout',
-})
-
-useSeoMeta({
-  title: 'Register',
-  description: 'Register for an account',
-  keywords: 'register, account, signup',
-})
 
 export default defineComponent({
+
   data() {
     return {
       activeStep: 1,
@@ -36,6 +25,7 @@ export default defineComponent({
 
       fullname: '',
       phone: '',
+      unmaskedPhone: '',
       username: '',
       dob: '',
       bio: '',
@@ -59,6 +49,9 @@ export default defineComponent({
 
 
       loadingSigningUp: false,
+
+      // user id once signed up
+      userId: '',
     }
   },
   setup() {
@@ -68,12 +61,15 @@ export default defineComponent({
   },
   computed: {
     validAccountInfo() {
-      let valid = this.email !== '' && this.password !== ''  && this.confirmPassword !== '';
+      let valid = this.validateEmail() && this.password !== ''  && this.confirmPassword !== '';
       valid = valid && this.password === this.confirmPassword;
+      valid = valid && (this.password).length > 6
       return !valid;
     },
     validPersonalInfo() {
-        let valid = this.fullname && this.phone && this.username;
+      // console.log(this.phone)
+      this.removePhoneMask()
+        let valid = this.fullname !== '' && (this.unmaskedPhone).length === 10 && this.username !== '' && this.month !== '' && this.day !== '' && this.year !== '';
         return !valid;
     },
 
@@ -90,8 +86,16 @@ export default defineComponent({
       }
       return false;
     },
+
+    removePhoneMask() {
+      this.unmaskedPhone = this.phone.replace(/\D/g, '');
+    },
     async validInfo() {
-      return (this.email !== '' && this.password !== '' && this.confirmPassword !== '' && this.fullname !== '' && this.phone !== '' && this.username !== '' && this.month !== '' && this.day !== '' && this.year !== '') && this.password === this.confirmPassword;
+      console.log((this.unmaskedPhone).length === 10)
+      let valid = this.validateEmail() && (this.password).length > 6 && this.confirmPassword !== '' && this.password === this.confirmPassword;
+      valid = valid && this.fullname !== '' && ((this.unmaskedPhone).length === 10) && this.username !== '' && this.month !== '' && this.day !== '' && this.year !== '';
+      return valid;
+      // return (this.email !== '' && this.password !== '' && this.confirmPassword !== '' && this.fullname !== '' && this.phone !== '' && this.username !== '' && this.month !== '' && this.day !== '' && this.year !== '') && this.password === this.confirmPassword;
     },
     validateEmail() {
       const match =  this.email.match(
@@ -113,33 +117,34 @@ export default defineComponent({
         return;
       }
 
-      // this.dob = new Date(parseInt(this.year), parseInt(this.monthMap[this.month]), parseInt(this.day)).toISOString();
 
-      // const { data, error } = await this.supabase.auth.signUp(
-      //   {
-      //     email: this.email,
-      //     password: this.password,
-      //     phone: this.phone,
-      //     options: {
-      //       data: {
-      //         fullname: this.fullname,
-      //         username: this.username,
-      //         bio: this.bio,
-      //         dob: this.dob,
-      //         location: null,
-      //         website: null,
-      //       },
+
+      const { data, error } = await this.supabase.auth.signUp(
+        {
+          email: this.email,
+          password: this.password,
+          phone: this.unmaskedPhone,
+          options: {
+            data: {
+              fullname: this.fullname,
+              username: this.username,
+              bio: this.bio,
+              dob: this.dob,
+              location: '',
+              website: '',
+              avatar_url: '',
+            },
             
-      //     }
-      //   }
-      // )
-      // if(error) {
-      //   console.log(error.message)
-      // } else {
-      //   this.activeStep++;
-      // }
-
-      this.activeStep++;
+          }
+        }
+      )
+      if(error) {
+        if(error.status !== 429) {
+          this.registerErrorMessage = error.message;
+        }
+      } else {
+        this.activeStep++;
+      }
 
       this.loadingSigningUp = false;
       
@@ -147,11 +152,11 @@ export default defineComponent({
     async submitOTP() {
       const { data: { session }, error} = await this.supabase.auth.verifyOtp({ email: this.email, token: this.otp, type: "email" })
 
-      const datetime = new Date().toISOString()
 
       if(error) {
         console.log(error)
       } else {
+        this.userId = session?.user?.id as string;
         this.store.setUser((session?.user as unknown) as User)
         this.store.changeAuthenticated(true)
         navigateTo(this.$route.redirectedFrom?.fullPath || '/')
@@ -175,7 +180,14 @@ export default defineComponent({
       else {
         this.validEmail = true;
       }
+      
     },
+    phone() {
+      this.removePhoneMask()
+    },
+    dob() {
+      console.log(this.dob)
+    }
   },
   components: {
     UploadAvatar,
@@ -288,8 +300,13 @@ export default defineComponent({
 
                       <PersonalInformation 
                         :fullnameProp="fullname" :phoneProp="phone" :usernameProp="username" :monthProp="month" :dayProp="day" :yearProp="year" :bioProp="bio"
+                        v-model:dob="dob"
                         v-model:fullname="fullname" v-model:phone="phone" v-model:username="username" v-model:month="month" v-model:day="day" v-model:year="year" v-model:bio="bio"></PersonalInformation>
 
+
+                      <div>
+                        <p class="text-sm text-red-500">{{ registerErrorMessage }}</p>
+                      </div>
 
                       <div class="flex w-full pt-6 justify-between">
                         <ion-button fill="outline" size="small" @click="prev" v-if="activeStep > 1">
@@ -307,7 +324,7 @@ export default defineComponent({
                 <StepPanel :value="3">
                     <div class="w-full flex flex-col gap-2 mx-auto mt-5">
                         <div class="text-center w-full">
-                          <UploadAvatar :username="username" v-model="file"></UploadAvatar>
+                          <UploadAvatar :userId="userId" :username="username" v-model="file"></UploadAvatar>
                           <div class="flex w-full pt-6 justify-end">
                             <!-- <ion-button fill="outline" size="small" @click="prev">
                             Prev

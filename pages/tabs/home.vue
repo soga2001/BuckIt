@@ -28,7 +28,7 @@ export default defineComponent({
           </ion-toolbar>
         </ion-header>
         <ion-content color="dark">
-          Home Content
+        <img src="https://phtpbjvibmpkqerebqrn.supabase.co/storage/v1/object/public/avatars/avatars/c8c0e9bb-05ab-4b6d-b440-ca41ba1aea23/avatar" />
         </ion-content>
       </NuxtLayout>
     </ion-page>

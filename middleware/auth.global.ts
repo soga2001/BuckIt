@@ -6,7 +6,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     
     if(await user.value && to.meta.auth == false) {
-        return navigateTo(to.redirectedFrom?.fullPath) || navigateTo('/home')
+        return navigateTo(to.redirectedFrom?.fullPath) || navigateTo(from.fullPath) || navigateTo('/home')
     }
+    
 })
   

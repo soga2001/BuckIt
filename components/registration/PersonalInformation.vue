@@ -48,6 +48,7 @@ export default defineComponent( {
             day: this.dayProp,
             year: this.yearProp,
             bio: this.bioProp,
+            dob: '',
 
             
             dayList: Array.from({length: 31}, (_, i) => i + 1),
@@ -96,6 +97,14 @@ export default defineComponent( {
 
             this.dayList = Array<number>(daysInMonthMap[monthTemp]).fill(0).map((_, i) => i + 1);
         },
+        updateDOB() {
+            if(this.year != '' && this.day != '' && this.month != '') {
+                const tempYear = typeof this.year === 'string' ? parseInt(this.year) : this.year;
+                const tempDay = typeof this.day === 'string' ? parseInt(this.day) : this.day;
+                this.dob = new Date(tempYear, parseInt(this.monthMap[this.month]), tempDay).toISOString();
+                this.$emit('update:dob', this.dob)
+            }
+        }
     },
     watch: {
         fullname() {
@@ -109,6 +118,7 @@ export default defineComponent( {
         },
         day() {
             this.$emit('update:day', this.day)
+            this.updateDOB();
         },
         year() {
             if(this.month && this.year) {
@@ -133,11 +143,16 @@ export default defineComponent( {
             }
 
             this.$emit('update:year', this.year)
+            this.updateDOB();
+
         },
         month() {
             this.daysInAMonth();
 
             this.$emit('update:month', this.month)
+
+            this.updateDOB();
+
         },
         bio() {
             this.$emit('update:bio', this.bio)
@@ -170,7 +185,7 @@ export default defineComponent( {
 
                 <InputGroup class="input-group">
                     <InputGroupAddon class="input-addon">
-                        <ion-icon :icon="ioniconsPersonCircle" aria-hidden="true"></ion-icon>
+                        <ion-icon :icon="ioniconsPerson" aria-hidden="true"></ion-icon>
                     </InputGroupAddon>
                     <InputText class="input" type="text" v-model="fullname" placeholder="Enter your full name" />
                 </InputGroup>
@@ -184,7 +199,7 @@ export default defineComponent( {
 
                 <InputGroup class="input-group">
                     <InputGroupAddon class="input-addon">
-                    <ion-icon :icon="ioniconsPerson" aria-hidden="true"></ion-icon>
+                    <ion-icon :icon="ioniconsAtCircle" aria-hidden="true"></ion-icon>
                     </InputGroupAddon>
                     <InputText class="input" type="text" v-model="username" placeholder="Enter a username" />
                 </InputGroup>

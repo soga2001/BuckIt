@@ -6,8 +6,11 @@ export default defineEventHandler(async (event) => {
   
   const username = query.username as string
 
-  const { data: user } = await supabase.from('profiles').select().eq('username', username).single()
+  console.log('username',username)
 
+  const { data: user, error } = await supabase.from('profiles').select().eq('username', username).single()
+
+  console.log('user',user)
 
   return {
     user: user

@@ -27,7 +27,6 @@ export default defineComponent({
   methods: {
     async checkIfDesktop() {
       this.store.changeDevice(this.$device.isDesktop as boolean)
-
     },
     toggle(event: Event) {
       (this.$refs.menu as any).toggle(event)
@@ -93,22 +92,21 @@ export default defineComponent({
 
           <div class="tabs-right flex-none flex gap-2 basis-1/3">
 
-            <Button class="p-0 m-0 bg-none"  severity="info" rounded outlined   aria-haspopup="true" aria-controls="overlay_menu">
-              <ion-icon size="large" :icon="ioniconsNotificationsCircle" />
-              <!-- <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" /> -->
-            </Button>
+            <OverlayBadge >
+              <ion-icon :icon="ioniconsNotifications" />
+            </OverlayBadge>
 
 
-            <Button class="p-0 m-0"  severity="info" rounded outlined  @click="toggle" aria-haspopup="true" aria-controls="overlay_menu">
-              <!-- <ion-icon size="large" :icon="ioniconsPersonCircleOutline" /> -->
-              <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
+            <Button class="p-0 m-0 w-fit border-primary"  severity="info" rounded outlined  @click="toggle" aria-haspopup="true" aria-controls="overlay_menu">
+              <Avatar v-if="store.user.user_metadata?.avatar_url !== ''" :image="store.user.user_metadata?.avatar_url" shape="circle" />  
+              <Avatar v-else image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
             </Button>
             <Menu ref="menu" id="overlay_menu" :model="dropdown" :popup="true" >
               <template #start>
                 <!-- @click.stop="$router.push({name: 'profile', params: {username: store.user.user_metadata?.username}})" -->
                 <button @click="$router.push(`/user/${store.user.user_metadata?.username}`)" v-ripple class="relative overflow-hidden w-full p-link flex items-center p-2 pl-3 text-surface-700 dark:text-surface-0/80 hover:bg-surface-200 dark:hover:bg-surface-600 rounded-none">
-                  <Avatar v-if="store.user.user_metadata?.avatar_url == null" :image="store.user.user_metadata?.avatar_url" class="mr-2" shape="circle" />  
-                  <Avatar v-else image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" class="mr-2" shape="circle" />
+                  <Avatar v-if="store.user.user_metadata?.avatar_url !== ''" :image="store.user.user_metadata?.avatar_url" class="border-primary border mr-2" shape="circle" />  
+                  <Avatar v-else image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" class="border-primary border mr-2" shape="circle" />
                     <span class="inline-flex flex-col justify-start">
                         <span class="font-bold text-left">{{ store.user.user_metadata?.fullname }}</span>
                         <span class="text-sm text-left">@{{ store.user.user_metadata?.username }}</span>

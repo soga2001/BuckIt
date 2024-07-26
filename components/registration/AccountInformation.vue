@@ -50,7 +50,7 @@ export default defineComponent({
 
 <template>
     <div>
-      <form class="form flex flex-col gap-2 w-full" ref="loginForm" @submit.prevent="">
+      <form class="form flex flex-col gap-3 w-full" ref="loginForm" @submit.prevent="">
         <div class="text-center text-2xl font-bold">
             Login Information
         </div>
@@ -62,7 +62,7 @@ export default defineComponent({
 
           <InputGroup class="input-group">
               <InputGroupAddon class="input-addon">
-                <ion-icon :icon="ioniconsAtCircle" aria-hidden="true"></ion-icon>
+                <ion-icon :icon="ioniconsMail" aria-hidden="true"></ion-icon>
               </InputGroupAddon>
               <InputText class="input" variant="outlined" v-model="email" placeholder="Enter your email" />
           </InputGroup>
@@ -83,6 +83,8 @@ export default defineComponent({
                   <ion-icon :icon="togglePassword ? ioniconsEye : ioniconsEyeOff" @click="togglePassword = !togglePassword" />
                 </InputGroupAddon>
             </InputGroup>
+          <small id="password-help">Password should be longer than 6 letters</small>
+
         </div>
 
         <div class="flex flex-col gap-2">

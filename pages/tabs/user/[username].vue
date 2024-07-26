@@ -1,9 +1,9 @@
 <script lang="ts">
-import type { UserMetaData } from '~/assets/interface/user';
+import type { User, UserMetaData } from '~/assets/interface/user';
 
 
 definePageMeta({
-  alias: ['/user/:username'],
+  // alias: ['/user/:username'],
   path: '/user/:username',
   auth: true,
   name: "profile",
@@ -35,7 +35,6 @@ export default defineComponent({
       }
     },
     getUsernameFromURL() {
-      // regex to get username from url? 
 
       const regex = /^\/user\/([^/]+)$/;
 
@@ -49,32 +48,22 @@ export default defineComponent({
       } else {
         console.log('No username found in the URL');
       }
-
-      // return match ? match[1] : null
-
-      // return this.$route.params.username || 
     },
   },
   created() {
-    // this.getUsernameFromURL()
-    console.log(this.$route.params.username)
-    this.getUser()
+    // this.getUser()
   },
   watch: {
     "$route"(value) {
-      // this.getUser()
       this.username = this.$route.params.username
     },
     username(value) {
       this.getUser()
     }
   },
-  // beforeRouteUpdate(async (to, from) => {
-  // // only fetch the user if the id changed as maybe only the query or the hash changed
-  //   if (to.params.id !== from.params.id) {
-  //     userData.value = await fetchUser(to.params.id)
-  //   }
-  // })
+  mounted() {
+    // this.getUser()
+  }
 })
 </script>
 
@@ -85,10 +74,75 @@ export default defineComponent({
           <ion-back-button default-href="#"></ion-back-button>
         </ion-buttons>
         <ion-title class="text-center">{{user?.fullname}}</ion-title>
+        <ion-buttons slot="end">
+          <ion-icon slot="icon-only" :icon="ioniconsEllipsisVertical"></ion-icon>
+        </ion-buttons>
       </ion-toolbar>
+       
       <ion-content color="dark">
-        Discover Content
+        <div class="flex flex-wrap w-full justify-center mt-3 gap-10 flex-rows">
+          <div>
+            <Image class="profile_image" alt="Image" preview>
+              <template #previewicon>
+                  <i class="pi pi-search"></i>
+              </template>
+              <template #image>
+                  <img  :src="user?.avatar_url" alt="user_avatar" />
+              </template>
+              <template #preview="slotProps">
+                  <img :src="user?.avatar_url" alt="preview" :style="slotProps.style" @click="slotProps.onClick" />
+              </template>
+          </Image>
+          </div>
+          <div class="mt-5">
+            <div class="flex flex-row flex-wrap gap-2 items-center">
+              <h1 class="text-left text-xl font-bold">{{user?.fullname}}</h1>
+              <!-- <span>
+                <ion-icon :icon="ioniconsCheckmarkCircle" class="text-primary"></ion-icon>
+              </span> -->
+            </div>
+            <p class="text-left text-sm">@{{user?.username}}</p>
+            <div class="flex flex-wrap flex-row gap-2">
+              <ion-button  expand="block" fill="outline" color="primary">Follow</ion-button>
+              <ion-button  expand="block" fill="solid" color="secondary">Message</ion-button>
+            </div>
+            <p class="text-left text-sm">{{user?.bio}}</p>
+
+            <div class="flex flex-row">
+              <div class="flex flex-row gap-2" v-if="user?.location">
+                <ion-icon :icon="ioniconsLocationSharp"></ion-icon>
+                <span>{{user?.location}}</span>
+              </div>
+              <div class="flex flex-row gap-2">
+                <ion-icon :icon="ioniconsCalendarSharp"></ion-icon>
+                <!-- <span>{{user?.created_at}}</span> -->
+              </div>
+            </div>
+
+
+          </div>
+          
+        </div>
       </ion-content>
     </ion-page> 
 </template>
   
+
+<style scoped lang="scss">
+
+.profile_image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--ion-color-primary);
+}
+
+ion-icon {
+  font-size: 1.3rem !important;
+}
+
+</style>

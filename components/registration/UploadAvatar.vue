@@ -2,10 +2,15 @@
 
 import { usePrimeVue } from 'primevue/config';
 import type { FileUploadSelectEvent, FileUploadRemoveEvent } from 'primevue/fileupload';
+import type { User } from '~/assets/interface/user';
 
 export default defineComponent({
     props: {
         username: {
+            type: String,
+            required: true
+        },
+        userId: {
             type: String,
             required: true
         }
@@ -15,39 +20,63 @@ export default defineComponent({
             file: null as File | null,
             imgURL: '',
             url: "",
+            disabled: false,
         }
     },
     setup() {
         const store = useStore()
         const supabase = useSupabaseClient()
         const primevue = usePrimeVue();
-        return {store, supabase, primevue}
+        const tempUser = useSupabaseUser()
+        const user = (tempUser.value as unknown) as User
+        return {store, supabase, primevue, user}
     },
     methods: {
         async getPublicURL() {
-            const { data } = await this.supabase.storage.from('avatars').getPublicUrl(`avatars/${this.username}/avatar`);
+            const { data } = await this.supabase.storage.from('avatars').getPublicUrl(`${this.user.id}/avatar`);
+            console.log(data.publicUrl)
             this.url = data.publicUrl
-            await this.updateProfile()
+            this.updateProfile()
         },
         async uploadAvatar() {
 
             if(this.file == null) {
                 return null;
             }
-            const { data, error } = await this.supabase.storage.from('avatars').upload(`${this.username}/avatar`, this.file)
-            if(error) {
-                console.log(error.message)
-                return null;
+            console.log(this.user.id)
+            try {
+                const { data, error } = await this.supabase.storage.from('avatars').upload(`${this.user.id}/avatar`, this.file)
+            } catch (e) {
+                const {data, error } = await this.supabase.storage.from('avatars').update(`${this.user.id}/avatar`, this.file, {
+                    upsert: true
+                })
+                if(error) {
+                    console.log(error.message)
+                    return null;
+                }
+
             }
+            
             await this.getPublicURL()
         },
         async updateProfile() {
-            const user = useSupabaseUser()
 
-            const {data, error } = await this.supabase.from('profiles').upsert({id: user.value.id, avatar_url: this.url } as never, {})
+            // const {data, error } = await this.supabase.from('profiles').update({id: this.user.id, avatar_url: this.url as string } as never).eq('id', this.user.id).select()
+            
+            const {data, error } = await this.supabase.auth.updateUser({
+                data: { avatar_url: this.url as string }
+            })
+
+            if(error) {
+                console.log(error.message)
+            }
+            else {
+                this.store.setUser((data as unknown) as User)
+            }
         },
         fileChange(e: FileUploadSelectEvent) {
             this.file = e.files[0] as File;
+            console.log(this.file)
             this.imgURL = URL.createObjectURL(this.file);
         },
         removeFile(e: FileUploadRemoveEvent) {
@@ -68,6 +97,15 @@ export default defineComponent({
 
             return `${formattedSize} ${sizes?.length && sizes[i]}`;
         }
+    },
+    watch: {
+        file() {
+            this.disabled = ((this.file !== null) || this.file !== undefined) ? false : true;
+        },
+        user() {
+            console.log(this.user)
+            // this.getPublicURL()
+        }
     }
 })
 </script>
@@ -76,16 +114,16 @@ export default defineComponent({
     <div>
         <div class="text-center mb-4 text-2xl font-bold">Upload an avatar <span class="italic text-sm">(Optional)</span></div>
         <FileUpload class="w-full" name="demo[]" v-model="file" :showCancelButton="false" :showUploadButton="false" @select="fileChange" @removeUploadedFile="removeFile" :auto="true" accept="image/*" :maxFileSize="1000000">
-            <template #header="{ chooseCallback, files }">
+            <template #header="{ chooseCallback }">
             <div class="flex flex-wrap justify-between items-center flex-1 gap-4">
                 <div class="flex gap-2">
-                    <ion-button  @click="chooseCallback()" shape="round" class="avatar-upload">
+                    <ion-button :disabled="disabled"  @click="chooseCallback()" shape="round" class="avatar-upload">
                         <ion-icon slot="icon-only" :icon="ioniconsImageOutline"></ion-icon>
                     </ion-button>
                 </div>
             </div>
             </template>  
-            <template #content="{ uploadedFiles, removeUploadedFileCallback}">
+            <template #content="{ removeUploadedFileCallback}">
                 <div class="flex flex-col items-center gap-8 pt-4">
                 
                 <div v-if="file != null">
@@ -116,7 +154,7 @@ export default defineComponent({
                 </div>
             </template>
             <template v-if="file == null" #empty>
-                <div class="flex items-center justify-center flex-col w-full p-10">
+                <div class="flex items-center justify-center flex-col w-full p-10"  >
                     <ion-icon :icon="ioniconsCloudUploadOutline" class="upload-icon"></ion-icon>
                     <p class="mt-6 mb-0">Drag and drop files to here to upload.</p>
                 </div>

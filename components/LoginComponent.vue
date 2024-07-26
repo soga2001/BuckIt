@@ -66,7 +66,8 @@ export default defineComponent({
     <div class="main bg-green">
         <form class="form flex flex-col gap-3" ref="loginForm" @submit.prevent="login">
             <div class="title">
-                <h1>Sign in to BuckIt</h1>
+                <h1>Login to your Buck<span class="bg-primary rounded-sm px-2 ml-1">It</span> account</h1>
+
             </div>
             <!-- <div class="flex-column">
             <label>Email </label>
@@ -83,7 +84,7 @@ export default defineComponent({
 
               <InputGroup class="input-group">
                   <InputGroupAddon class="input-addon">
-                    <ion-icon :icon="ioniconsAtCircle" aria-hidden="true"></ion-icon>
+                    <ion-icon :icon="ioniconsMail" aria-hidden="true"></ion-icon>
                   </InputGroupAddon>
                   <InputText class="input" variant="outlined" v-model="email" placeholder="Enter your email" />
               </InputGroup>

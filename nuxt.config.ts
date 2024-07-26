@@ -24,7 +24,8 @@ export default defineNuxtConfig({
   css: [
     'ant-design-vue/dist/reset.css',
     '~/assets/styles/global.scss',
-    '~/assets/styles/ionic.css'
+    '~/assets/styles/ionic.css',
+    'floating-vue/dist/style.css'
   ],
   ionic: {
     integrations: {
@@ -66,7 +67,7 @@ export default defineNuxtConfig({
       login: '/login',
       callback: '/confirm',
       include: undefined,
-      exclude: ['/register', '/testing'],
+      exclude: ['/register'],
       cookieRedirect: false,
     },
     cookieOptions: {
