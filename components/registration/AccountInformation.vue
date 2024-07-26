@@ -109,7 +109,7 @@ export default defineComponent({
 
             <p class="flex items-center">Already have an account? 
                 <span class="span">
-                    <ion-button href="/login" fill="clear">Sign In</ion-button>
+                    <ion-button class="hover-primary ml-3 capitalize rounded-md" href="/login" fill="clear">Sign In</ion-button>
                 </span>
             </p>
           </div>

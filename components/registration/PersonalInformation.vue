@@ -115,18 +115,20 @@ export default defineComponent( {
 
                 const parsedYear = typeof this.year === 'string' ? parseInt(this.year) : this.year;
 
-                const tempDay = new Date(parsedYear, parseInt(this.monthMap[this.month]), 0).getDate();
+                const tempDay = new Date(parsedYear, parseInt(this.monthMap[this.month]), 0).getDate() || 31;
 
                 if((this.currentMonth < parseInt(this.monthMap[this.month])) && (this.currentYear == parsedYear)) {
                 this.month = '';
                 }
+
+                
 
                 this.dayList = Array<number>(tempDay).fill(0).map((_, i) => i + 1);
 
                 const parsedDay = typeof this.day === 'string' ? parseInt(this.day) : this.day;
 
                 if(parsedDay > tempDay) {
-                this.day = '';
+                    this.day = '';
                 }
             }
 

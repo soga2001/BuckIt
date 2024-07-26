@@ -5,9 +5,10 @@
 	--ion-color-primary-rgb: 255,0,255;
 	--ion-color-primary-contrast: #000000;
 	--ion-color-primary-contrast-rgb: 0,0,0;
-	--ion-color-primary-shade: #e000e0;
-	--ion-color-primary-shade-rgb: 224,0,224;
-	--ion-color-primary-tint: #ff1aff;
+	--ion-color-primary-shade: #5f095f;
+  --ion-color-primary-shade-rgb: 95,9,95;
+
+  --ion-color-primary-tint: #ff1aff;
 
 
 

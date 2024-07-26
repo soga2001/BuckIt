@@ -189,7 +189,7 @@ export default defineComponent({
 
 <template>
     <div class="card">
-        <Stepper :linear="true" v-model:value="activeStep" class="!p-12 relative">
+        <Stepper :linear="true" v-model:value="activeStep" class="py-5 relative">
             
             <!-- <StepList class="sticky top-0 z-999">
               <Step :value="1" :class="{activeStep: 1 < activeStep, firstStep: true}"><span>Account</span></Step>
@@ -200,11 +200,13 @@ export default defineComponent({
             <StepList>
                 <Step linear v-slot="{ value }" asChild :value="1">
                     <div class="flex flex-row flex-auto gap-2">
-                        <button v-tooltip.bottom="'Login Information'" id="account-info" class="bg-transparent border-0 inline-flex flex-col gap-2">
+                        <button v-tooltip="'Login Information'" id="account-info" class="bg-transparent border-0 inline-flex flex-col gap-2">
                             <span
                                 :class="[
                                     'rounded-full border-2 w-12 h-12 inline-flex items-center justify-center',
-                                    { 'activeStep text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep }
+                                    { 'activeStep text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep,
+                                        'prevStep': value < activeStep
+                                    }
                                 ]"
                             >
                                 <!-- <i class="pi pi-lock" /> -->
@@ -217,11 +219,12 @@ export default defineComponent({
                 </Step>
                 <Step linear v-slot="{ value }" asChild :value="2">
                     <div class="flex flex-row flex-auto gap-2">
-                        <button v-tooltip.bottom="'Personal Information'" class="bg-transparent border-0 inline-flex flex-col gap-2">
+                        <button v-tooltip="'Personal Information'" class="bg-transparent border-0 inline-flex flex-col gap-2">
                             <span
                                 :class="[
                                     'rounded-full border-2 w-12 h-12 inline-flex items-center justify-center',
-                                    { 'activeStep text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep }
+                                    { 'activeStep text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep,
+                                    'prevStep': value < activeStep }
                                 ]"
                             >
                               
@@ -233,11 +236,12 @@ export default defineComponent({
                 </Step>
                 <Step linear v-slot="{ value }" asChild :value="3">
                     <div class="flex flex-row flex-auto gap-2">
-                        <button v-tooltip.bottom="'Upload Avatar'" class="bg-transparent border-0 inline-flex flex-col gap-2">
+                        <button v-tooltip="'Upload Avatar'" class="bg-transparent border-0 inline-flex flex-col gap-2">
                             <span
                                 :class="[
                                     'rounded-full border-2 w-12 h-12 inline-flex items-center justify-center',
-                                    { 'activeStep text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep }
+                                    { 'activeStep text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep,
+                                    'prevStep': value < activeStep }
                                 ]"
                             >
                               <ion-icon :icon="ioniconsImage" />
@@ -248,11 +252,12 @@ export default defineComponent({
                 </Step>
                 <Step v-slot="{ value }" asChild :value="4">
                     <div class="flex flex-row pl-2">
-                        <button v-tooltip.bottom="'Verify Account'" class="bg-transparent border-0 inline-flex flex-col gap-2" >
+                        <button v-tooltip="'Verify Account'" class="bg-transparent border-0 inline-flex flex-col gap-2" >
                             <span
                                 :class="[
                                     'rounded-full border-2 w-12 h-12 inline-flex items-center justify-center',
-                                    { 'activeStep text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep }
+                                    { 'activeStep text-primary-contrast border-primary': value <= activeStep, 'border-surface-200 dark:border-surface-700': value > activeStep,
+                                    'prevStep': value < activeStep }
                                 ]"
                             >
                                 <ion-icon :icon="ioniconsCheckmarkCircle" />
@@ -263,9 +268,9 @@ export default defineComponent({
                 
             </StepList>
             
-            <StepPanels class="step-panels z-1">
-                <StepPanel :value="1">
-                    <div class="flex flex-col gap-1 mx-auto mt-5" style=" max-width: 600px">
+            <StepPanels class="step-panels w-full z-1">
+                <StepPanel class="w-full" :value="1">
+                    <div class="flex w-full flex-col gap-1 mx-auto mt-5" style=" max-width: 600px">
 
                       <AccountInformation :emailProp="email" :passwordProp="password" :confirmPassProp="confirmPassword" v-model:email="email" v-model:password="password" v-model:confirmPassword="confirmPassword"></AccountInformation>
 
@@ -346,10 +351,13 @@ ion-content {
 }
 
 .activeStep {
-  background-color: rgba(var(--ion-color-primary-rgb), 0.1);
-
+//   background-color: rgba(var(--ion-color-primary-rgb), 0.1);
   color: var(--ion-color-primary);
 
+}
+
+.prevStep {
+  background-color: rgba(var(--ion-color-primary-shade-rgb), .5);
 }
 
 
@@ -381,7 +389,6 @@ ion-icon {
 }
 
 .step-panels {
-    max-width: 760px;
     width: 100%;
 
     min-height: 500px;

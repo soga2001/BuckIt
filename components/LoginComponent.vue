@@ -110,17 +110,23 @@ export default defineComponent({
             <div class="flex w-full justify-between">
               <div>
               </div>
-              <span class="span">Forgot password?</span>
+              <span class="link text-sm">Forgot password?</span>
             </div>
             <div class="flex justify-center">
-              <input :disabled="email == '' && password == ''"class="button-submit" type="submit" value="Sign In"/>
+              <input :disabled="email == '' && password == ''"class="button-submit text-md font-bold" type="submit" value="Sign In"/>
             </div>
             <p class="flex justify-center items-center">Don't have an account? 
             <span class="span">
-                <ion-button href="/register" class="text-white" fill="clear">Sign Up</ion-button>
+                <!-- <ion-button href="/register" class="text-white" fill="clear">Sign Up</ion-button> -->
+                <ion-button class="hover-primary ml-3 capitalize rounded-md" href="/register" fill="clear">Sign Up</ion-button>
             </span>
             </p>
-            <p class="text-center text-sm font-black">Or With</p>
+
+            <div class="separator p-5">
+              <hr class="line bg-white">
+              <span>Or</span>
+              <hr class="line bg-white">
+            </div>
 
             <div class="flex gap-5">
             <button class="btn google">
@@ -153,20 +159,18 @@ export default defineComponent({
 
 
 
-.span {
-  font-size: 14px;
+.link {
   margin-left: 5px;
   cursor: pointer;
-  font-weight: 500;
   
   // capitalize 
   text-transform: capitalize !important;
+  text-decoration: underline;
 
 
 
   &:hover {
-    color: rgba(var(--ion-color-primary-rgb), 0.8);
-    text-decoration: underline;
+    color: rgba(var(--ion-color-primary-rgb));
   
   }
 }
@@ -175,16 +179,15 @@ export default defineComponent({
 .button-submit {
 
   // height: 50px;
-  padding: 10px 30px;
+  padding: 13px 40px;
   border-radius: 10px;
-  border: 2px solid var(--ion-color-primary);
+  border: 1px solid var(--ion-color-primary);
   color: white;
-  font-weight: 900;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 
   &:hover {
-    background-color: rgba(var(--ion-color-primary-rgb), 0.4);
+    background-color: rgba(var(--ion-color-primary-rgb), 0.2);
   }
 }
 
@@ -229,6 +232,21 @@ export default defineComponent({
 
 ion-icon {
   font-size: 1.5rem;
+}
+
+.separator {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.separator .line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  border: 0;
 }
 </style>
   

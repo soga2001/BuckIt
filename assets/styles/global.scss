@@ -6,7 +6,6 @@
     border: none;
 }
 
-
 .input-group {
     border: 1px solid var(--ion-color-medium);
     border-radius: 2px;
@@ -21,5 +20,16 @@
   
     ion-icon {
       color: var(--ion-color-primary);
+    }
+}
+
+
+
+.hover-primary {
+    color: var(--ion-color-primary);
+
+    &:hover {
+        color: var(--ion-color-primary) !important;
+        background-color: rgba(var(--ion-color-primary-rgb), 0.1) !important;
     }
 }
