@@ -27,4 +27,5 @@ export interface UserMetaData {
     website: string,
     location: string,
     dob: string,
+    created_at: string,
 }

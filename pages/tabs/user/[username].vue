@@ -19,12 +19,14 @@ export default defineComponent({
   data() {
     return {
       user: null as UserMetaData | null,
-      username: this.$route.params.username
+      username: this.$route.params.username,
+      loadingUser: true,
     }
   },
   setup() {
     const supabase = useSupabaseClient()
-    return {supabase }
+    const store = useStore()
+    return {supabase, store }
   },
   methods: {
     async getUser() {
@@ -32,6 +34,10 @@ export default defineComponent({
 
       if (data.user) {
         this.user = data.user as UserMetaData
+        // this.loadingUser = false
+        setTimeout(() => {
+          this.loadingUser = false
+        }, 2000)
       }
     },
     getUsernameFromURL() {
@@ -51,10 +57,11 @@ export default defineComponent({
     },
   },
   created() {
-    // this.getUser()
+    this.getUser()
   },
   watch: {
     "$route"(value) {
+      console.log('here')
       this.username = this.$route.params.username
     },
     username(value) {
@@ -69,7 +76,7 @@ export default defineComponent({
 
 <template>
     <ion-page>
-      <ion-toolbar color="dark">
+      <ion-toolbar v-if="!store.isDesktop" color="dark">
         <ion-buttons @click="$router.go(-1)" slot="start">
           <ion-back-button default-href="#"></ion-back-button>
         </ion-buttons>
@@ -80,48 +87,66 @@ export default defineComponent({
       </ion-toolbar>
        
       <ion-content color="dark">
-        <div class="flex flex-wrap w-full justify-center mt-3 gap-10 flex-rows">
-          <div>
-            <Image class="profile_image" alt="Image" preview>
-              <template #previewicon>
+        <div class="main w-full flex flex-col flex-wrap">
+          <div class="flex flex-wrap justify-center gap-10 flex-rows w-full w-2/3 bg-black m-auto" >
+            <div class="">
+              <Image v-if="!loadingUser" class="profile_image" alt="Image" preview>
+                <template #previewicon>
                   <i class="pi pi-search"></i>
-              </template>
-              <template #image>
+                </template>
+                <template #image>
                   <img  :src="user?.avatar_url" alt="user_avatar" />
-              </template>
-              <template #preview="slotProps">
+                </template>
+                <template #preview="slotProps">
                   <img :src="user?.avatar_url" alt="preview" :style="slotProps.style" @click="slotProps.onClick" />
-              </template>
-          </Image>
-          </div>
-          <div class="mt-5">
-            <div class="flex flex-row flex-wrap gap-2 items-center">
-              <h1 class="text-left text-xl font-bold">{{user?.fullname}}</h1>
-              <!-- <span>
-                <ion-icon :icon="ioniconsCheckmarkCircle" class="text-primary"></ion-icon>
-              </span> -->
+                </template>
+              </Image>
+              <Skeleton v-else shape="circle" class="profile_image"></Skeleton>
             </div>
-            <p class="text-left text-sm">@{{user?.username}}</p>
-            <div class="flex flex-wrap flex-row gap-2">
-              <ion-button  expand="block" fill="outline" color="primary">Follow</ion-button>
-              <ion-button  expand="block" fill="solid" color="secondary">Message</ion-button>
-            </div>
-            <p class="text-left text-sm">{{user?.bio}}</p>
-
-            <div class="flex flex-row">
-              <div class="flex flex-row gap-2" v-if="user?.location">
-                <ion-icon :icon="ioniconsLocationSharp"></ion-icon>
-                <span>{{user?.location}}</span>
+            <div class="my-3 w-1/2 max-w-sm">
+              <div class="flex flex-row flex-wrap gap-2 items-center">
+                <h1 v-if="!loadingUser" class="text-left text-xl font-bold">{{user?.fullname}}</h1>
+                <!-- <span>
+                  <ion-icon :icon="ioniconsCheckmarkCircle" class="text-primary"></ion-icon>
+                </span> -->
+                <Skeleton v-else width="10rem" height="2rem" class="mb-2"></Skeleton>
               </div>
-              <div class="flex flex-row gap-2">
-                <ion-icon :icon="ioniconsCalendarSharp"></ion-icon>
-                <!-- <span>{{user?.created_at}}</span> -->
+              <p v-if="!loadingUser" class="text-left text-sm">@{{user?.username}}</p>
+              <Skeleton v-else width="6rem" height="1rem" class="mb-2"></Skeleton>
+              <div v-if="!loadingUser" class="flex flex-wrap flex-row gap-2">
+                <ion-button  expand="block" fill="outline" color="primary">Follow</ion-button>
+                <ion-button  expand="block" fill="solid" color="secondary">Message</ion-button>
               </div>
+              <div v-else class="flex flex-row gap-2">
+                <Skeleton width="10rem" height="3rem"></Skeleton>
+                <Skeleton width="10rem" height="3rem"></Skeleton>
+              </div>
+              <div  class="text-left text-sm">
+                <p v-if="!loadingUser">{{user?.bio}}</p>
+                <div v-else>
+                  <Skeleton height="1rem" class="mt-2"></Skeleton>
+                  <Skeleton height="1rem" class="mt-2"></Skeleton>
+                  <Skeleton height="1rem" class="mt-2"></Skeleton>
+                  <Skeleton height="1rem" class="mt-2"></Skeleton>
+                </div>
+              </div>
+              
+
+              <div class="flex flex-row">
+                <div class="flex flex-row gap-2" v-if="user?.location">
+                  <ion-icon :icon="ioniconsLocationSharp"></ion-icon>
+                  <span>{{user?.location}}</span>
+                </div>
+                <div class="flex flex-row gap-2" v-if="user?.created_at">
+                  <ion-icon :icon="ioniconsCalendarSharp"></ion-icon>
+                  <!-- <span>{{user?.created_at}}</span> -->
+                </div>
+              </div>
+
+
             </div>
-
-
+            
           </div>
-          
         </div>
       </ion-content>
     </ion-page> 
@@ -130,9 +155,14 @@ export default defineComponent({
 
 <style scoped lang="scss">
 
+.main {
+  margin: 0 auto;
+  width: 100%;
+}
+
 .profile_image {
-  width: 200px;
-  height: 200px;
+  width: 200px !important;
+  height: 200px !important;
   border-radius: 50%;
   overflow: hidden;
   margin-top: 20px;

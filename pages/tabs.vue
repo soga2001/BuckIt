@@ -17,6 +17,7 @@ export default defineComponent({
         { name: 'Logout', icon: ioniconsExitOutline, action: () => {this.logout()} }
       ],
       menu: ref(),
+      hideNav: ['/user/:username']
     }
   },
   setup() {
@@ -67,9 +68,9 @@ export default defineComponent({
         <ion-tab-bar class="flex flex-row w-full" :slot="store.desktop ? 'top' : 'bottom'">
           <div class="tabs-left flex-none basis-1/3">
             <div>
-              <ion-button shape="round">
+              <!-- <ion-button shape="round">
                 <ion-icon slot="icon-only" :icon="ioniconsHeart"></ion-icon>
-              </ion-button>
+              </ion-button> -->
             </div>
             <div>
               <ion-searchbar color="medium" animated show-clear-button="focus" placeholder="Search BuckIt"></ion-searchbar>
@@ -101,10 +102,10 @@ export default defineComponent({
               <Avatar v-if="store.user.user_metadata?.avatar_url !== ''" :image="store.user.user_metadata?.avatar_url" shape="circle" />  
               <Avatar v-else image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
             </Button>
+           
             <Menu ref="menu" id="overlay_menu" :model="dropdown" :popup="true" >
               <template #start>
-                <!-- @click.stop="$router.push({name: 'profile', params: {username: store.user.user_metadata?.username}})" -->
-                <button @click="$router.push(`/user/${store.user.user_metadata?.username}`)" v-ripple class="relative overflow-hidden w-full p-link flex items-center p-2 pl-3 text-surface-700 dark:text-surface-0/80 hover:bg-surface-200 dark:hover:bg-surface-600 rounded-none">
+                <button @click="() => {$router.push(`/user/${store.user.user_metadata?.username}`), toggle()}" v-ripple class="relative overflow-hidden w-full p-link flex items-center p-2 pl-3 text-surface-700 dark:text-surface-0/80 hover:bg-surface-200 dark:hover:bg-surface-600 rounded-none">
                   <Avatar v-if="store.user.user_metadata?.avatar_url !== ''" :image="store.user.user_metadata?.avatar_url" class="border-primary border mr-2" shape="circle" />  
                   <Avatar v-else image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" class="border-primary border mr-2" shape="circle" />
                     <span class="inline-flex flex-col justify-start">
@@ -115,13 +116,11 @@ export default defineComponent({
               </template>
               <template #item="{ item, props }">
                   <a v-ripple class="flex items-center" v-bind="props.action" @click="item.action">
-                      <!-- <span :class="item.icon" /> -->
                       <ion-icon :icon="item.icon" />
                       <span class="ml-2">{{ item.name }}</span>
                       <Badge v-if="item.badge" class="ml-auto" :value="item.badge" />
                       <span v-if="item.shortcut" class="ml-auto border border-surface-200 dark:border-surface-700 rounded-md bg-surface-100 dark:bg-surface-700 text-xs p-1">{{ item.shortcut }}</span>
                   </a>
-                  <!-- Hello -->
               </template>
             </Menu>
 
