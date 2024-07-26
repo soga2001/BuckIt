@@ -22,7 +22,7 @@ export interface UserMetaData {
     id: string,
     fullname: string,
     username: string,
-    avatar: string,
+    avatar_url: string,
     bio: string,
     website: string,
     location: string,

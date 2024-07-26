@@ -2,27 +2,25 @@
 import { defineComponent } from 'vue'
 
 // import { IonIcon } from '@ionic/vue';
-import type {User} from '~/assets/interface/user.ts'
-import {useStore} from '~/stores/store'
+import type {User} from '@/assets/interface/user.ts'
+import {useStore} from '@/stores/store'
 
-import LoginComponent from '~/components/LoginComponent.vue'
-
-definePageMeta({
-  auth: false,
-  name: "login",
-  layout: "auth-layout"
-})
-
-useSeoMeta({
-  title: 'Login',
-  description: 'This is the login page',
-  
-})
 
 export default defineComponent({
   data() {
     return {
-    
+      email: "",
+      password: "",
+
+      data: null as any,
+
+      error: '',
+
+      isPassword: true,
+
+      disabled: true,
+
+
     }
   },
   setup() {
@@ -65,15 +63,60 @@ export default defineComponent({
 </script>
 
 <template>
-    <ion-page>
-      <NuxtLayout name="auth-layout">
-        <ion-content color="dark">
-          <div class="main">
-            <LoginComponent />
-          </div>
-        </ion-content>
-      </NuxtLayout>
-    </ion-page>
+    <div class="main bg-green">
+        <form class="form" ref="loginForm" @submit.prevent="login">
+            <div class="title">
+                <h1>Sign in to BuckIt</h1>
+            </div>
+            <div class="flex-column">
+            <label>Email </label>
+            </div>
+
+            <ion-input placeholder="Enter your email" fill="outline" v-model="email" :clear-input="true">
+            <ion-icon slot="start" :icon="ioniconsAtSharp" aria-hidden="true"></ion-icon>
+            </ion-input>
+            
+            <div class="flex-column">
+            <label>Password </label>
+            </div>
+
+            <ion-input placeholder="Enter your password" fill="outline" v-model="password" :type="isPassword ? 'password' : 'text'">
+            <ion-icon slot="start" :icon="ioniconsLockClosed" aria-hidden="true"></ion-icon>
+            <ion-button fill="clear" slot="end" aria-label="Show/hide" @click="isPassword = !isPassword">
+                <ion-icon slot="icon-only" :icon="isPassword ? ioniconsEyeOutline : ioniconsEyeOffOutline" aria-hidden="true"></ion-icon>
+            </ion-button>
+            </ion-input>
+            
+            <div class="flex-row">
+            <div>
+            </div>
+            <span class="span">Forgot password?</span>
+            </div>
+            <input class="button-submit" type="submit" value="Sign In"/>
+            <p class="flex justify-center items-center">Don't have an account? 
+            <span class="span">
+                <ion-button href="/register" fill="clear">Sign Up</ion-button>
+                <!-- <ion-button :router-link="{name: 'register'}" fill="clear">Sign In</ion-button> -->
+                <!-- <nuxt-link to="/register">Sign Up</nuxt-link> -->
+            </span>
+            </p>
+            <p class="p line">Or With</p>
+
+            <div class="flex-row">
+            <button class="btn google">
+                <ion-icon :icon="ioniconsLogoGoogle" />
+        
+                Google 
+                
+            </button>
+            <button class="btn apple">
+                <ion-icon :icon="ioniconsLogoApple" />
+                Apple 
+                
+            </button>
+            </div>
+        </form>
+    </div>
 </template>
 
 <style scoped>

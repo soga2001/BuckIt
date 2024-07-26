@@ -53,7 +53,7 @@ export default defineComponent({
   },
   beforeMount() {
     const user = useSupabaseUser()
-    this.store.setUser(user.value as User)
+    this.store.setUser((user.value as unknown) as User)
   }
 })
 </script>
@@ -100,14 +100,14 @@ export default defineComponent({
 
 
             <Button class="p-0 m-0"  severity="info" rounded outlined  @click="toggle" aria-haspopup="true" aria-controls="overlay_menu">
-              <ion-icon size="large" :icon="ioniconsPersonCircleOutline" />
-              <!-- <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" /> -->
+              <!-- <ion-icon size="large" :icon="ioniconsPersonCircleOutline" /> -->
+              <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" shape="circle" />
             </Button>
             <Menu ref="menu" id="overlay_menu" :model="dropdown" :popup="true" >
               <template #start>
                 <!-- @click.stop="$router.push({name: 'profile', params: {username: store.user.user_metadata?.username}})" -->
                 <button @click="$router.push(`/user/${store.user.user_metadata?.username}`)" v-ripple class="relative overflow-hidden w-full p-link flex items-center p-2 pl-3 text-surface-700 dark:text-surface-0/80 hover:bg-surface-200 dark:hover:bg-surface-600 rounded-none">
-                  <Avatar v-if="store.user.user_metadata?.avatar == null" :image="store.user.user_metadata?.avatar" class="mr-2" shape="circle" />  
+                  <Avatar v-if="store.user.user_metadata?.avatar_url == null" :image="store.user.user_metadata?.avatar_url" class="mr-2" shape="circle" />  
                   <Avatar v-else image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" class="mr-2" shape="circle" />
                     <span class="inline-flex flex-col justify-start">
                         <span class="font-bold text-left">{{ store.user.user_metadata?.fullname }}</span>
