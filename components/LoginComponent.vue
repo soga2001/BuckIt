@@ -66,16 +66,9 @@ export default defineComponent({
     <div class="main bg-green">
         <form class="form flex flex-col gap-3" ref="loginForm" @submit.prevent="login">
             <div class="title">
-                <h1>Login to your Buck<span class="bg-primary rounded-sm px-2 ml-1">It</span> account</h1>
+                <h1>Login to your <span class="font-semibold"> Buck<span class="font-extrabold">IT</span> </span> account</h1>
 
             </div>
-            <!-- <div class="flex-column">
-            <label>Email </label>
-            </div>
-
-            <ion-input placeholder="Enter your email" fill="outline" v-model="email" :clear-input="true">
-            <ion-icon slot="start" :icon="ioniconsAtSharp" aria-hidden="true"></ion-icon>
-            </ion-input> -->
 
             <div class="flex flex-col gap-3">
               <div class="flex-column">

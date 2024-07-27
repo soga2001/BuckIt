@@ -88,7 +88,7 @@ export default defineComponent({
        
       <ion-content color="dark">
         <div class="main w-full flex flex-col flex-wrap">
-          <div class="flex flex-wrap justify-center gap-10 flex-rows w-full w-2/3 bg-black m-auto" >
+          <div class="flex flex-wrap justify-center gap-5 flex-rows w-full bg-black m-auto" >
             <div class="">
               <Image v-if="!loadingUser" class="profile_image" alt="Image" preview>
                 <template #previewicon>
@@ -106,9 +106,6 @@ export default defineComponent({
             <div class="my-3 w-1/2 max-w-sm">
               <div class="flex flex-row flex-wrap gap-2 items-center">
                 <h1 v-if="!loadingUser" class="text-left text-xl font-bold">{{user?.fullname}}</h1>
-                <!-- <span>
-                  <ion-icon :icon="ioniconsCheckmarkCircle" class="text-primary"></ion-icon>
-                </span> -->
                 <Skeleton v-else width="10rem" height="2rem" class="mb-2"></Skeleton>
               </div>
               <p v-if="!loadingUser" class="text-left text-sm">@{{user?.username}}</p>
@@ -118,8 +115,8 @@ export default defineComponent({
                 <ion-button  expand="block" fill="solid" color="secondary">Message</ion-button>
               </div>
               <div v-else class="flex flex-row gap-2">
-                <Skeleton width="10rem" height="3rem"></Skeleton>
-                <Skeleton width="10rem" height="3rem"></Skeleton>
+                <Skeleton width="6rem" height="2rem"></Skeleton>
+                <Skeleton width="6rem" height="2rem"></Skeleton>
               </div>
               <div  class="text-left text-sm">
                 <p v-if="!loadingUser">{{user?.bio}}</p>
@@ -148,6 +145,16 @@ export default defineComponent({
             
           </div>
         </div>
+        <ion-toolbar color="dark">
+          <ion-segment value="all">
+            <ion-segment-button value="all">
+              <ion-label class="capitalize">BuckIts</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="favorites">
+              <ion-label class="capitalize">Favorites</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-toolbar>
       </ion-content>
     </ion-page> 
 </template>

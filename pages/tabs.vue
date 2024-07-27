@@ -6,6 +6,8 @@ import {useStore} from '~/stores/store'
 import type {User} from '@/assets/interface/user';
 import { useSupabaseUser } from '#imports';
 
+import SearchComponent from '~/components/SearchComponent.vue';
+
 export default defineComponent({
   data() {
     return {
@@ -71,9 +73,11 @@ export default defineComponent({
               <!-- <ion-button shape="round">
                 <ion-icon slot="icon-only" :icon="ioniconsHeart"></ion-icon>
               </ion-button> -->
+              <span class="font-medium"> Buck<span class="font-extrabold">IT</span> </span>
             </div>
             <div>
-              <ion-searchbar color="medium" animated show-clear-button="focus" placeholder="Search BuckIt"></ion-searchbar>
+              <!-- <ion-searchbar color="medium" animated show-clear-button="focus" placeholder="Search BuckIt"></ion-searchbar> -->
+               <SearchComponent />
             </div>
           </div>
 
@@ -105,7 +109,7 @@ export default defineComponent({
            
             <Menu ref="menu" id="overlay_menu" :model="dropdown" :popup="true" >
               <template #start>
-                <button @click="() => {$router.push(`/user/${store.user.user_metadata?.username}`), toggle()}" v-ripple class="relative overflow-hidden w-full p-link flex items-center p-2 pl-3 text-surface-700 dark:text-surface-0/80 hover:bg-surface-200 dark:hover:bg-surface-600 rounded-none">
+                <button @click="() => {$router.push(`/user/${store.user.user_metadata?.username}`), ($refs.menu as any).hide()}" v-ripple class="relative overflow-hidden w-full p-link flex items-center p-2 pl-3 text-surface-700 dark:text-surface-0/80 hover:bg-surface-200 dark:hover:bg-surface-600 rounded-none">
                   <Avatar v-if="store.user.user_metadata?.avatar_url !== ''" :image="store.user.user_metadata?.avatar_url" class="border-primary border mr-2" shape="circle" />  
                   <Avatar v-else image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" class="border-primary border mr-2" shape="circle" />
                     <span class="inline-flex flex-col justify-start">
