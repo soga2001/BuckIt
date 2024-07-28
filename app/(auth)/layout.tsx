@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 // import "./globals.css";
 import Link from 'next/link'
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
@@ -16,11 +17,11 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col md:flex-row md:overflow-hidden">
-      <div className="w-full flex-none md:w-64">
+    <div className="h-full grid min-[700px]:grid-cols-3 min-[1000px]:grid-cols-2">
+      <div className="place-items-center max-[700px]:hidden">
         BUCKIT
       </div>
-      <div className="flex-grow p-6 md:p-12">{children}</div>
+      <div className="content-center min-[700px]:col-span-2 min-[1000px]:col-span-1 p-6 md:p-12">{children}</div>
     </div>
   );
 }
