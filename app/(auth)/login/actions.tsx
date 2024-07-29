@@ -13,14 +13,18 @@ export async function login(formData: FormData) {
     password: formData.get('password') as string,
   }
 
-//   const { error } = await supabase.auth.signInWithPassword(data)
+  const { error } = await supabase.auth.signInWithPassword(data)
 
-//   if (error) {
-//     // redirect('/error')
-//     console.log('error', error)
-//   }
+  if (error) {
+    return {
+      message: error.message,
+      status: error.status,
+      code: error.code,
+    }
+  }
 
-//   revalidatePath('/', 'layout')
-//   redirect('/')
+
+  revalidatePath('/', 'layout')
+  redirect('/')
 
 }

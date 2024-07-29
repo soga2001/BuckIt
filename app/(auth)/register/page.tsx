@@ -1,4 +1,4 @@
-import styles from './register.module.scss'
+import './register.scss'
 
 import type { Metadata } from 'next'
 
@@ -10,6 +10,6 @@ export const metadata: Metadata = {
 export default function Register() {
 
     return (
-        <div className={styles.main}>Register</div>
+        <div className="main">Register</div>
     )
 }
