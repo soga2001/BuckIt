@@ -1,7 +1,9 @@
+'use client'
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 // import "./globals.css";
 import Link from 'next/link'
+import { usePathname } from "next/navigation";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -12,14 +14,19 @@ const inter = Inter({ subsets: ["latin"] });
 // };
 
 export default function Layout({
-  children,
+  children, 
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const pathname = usePathname()
+
+  const login = pathname === '/login' ? 'in to' : 'up for'
+
   return (
-    <div className=" grid min-[700px]:grid-cols-3 min-[1000px]:grid-cols-2">
-      <div className="place-items-center max-[700px]:hidden">
-        BUCKIT
+    <div className='grid md:grid-cols-2 md:items-center'>
+      <div className="ml-5 max-[600px]:text-4xl max-[1000px]:text-5xl max-[1300px]:text-6xl text-7xl md:justify-self-center">
+        Sign {login} Buck<span className="font-black">IT</span>
       </div>
       <div className="content-center min-[700px]:col-span-2 min-[1000px]:col-span-1 p-6 md:p-12">{children}</div>
     </div>

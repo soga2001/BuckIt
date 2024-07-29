@@ -1,9 +1,29 @@
-import { type NextRequest } from 'next/server'
+import { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 import { updateSession } from '@/utils/supabase/middleware'
+import { redirect } from 'next/navigation'
+
+// export async function middleware(request: NextRequest) {
+//   // update user's auth session
+//   const {userProfiles, supabaseResponse} = await updateSession(request)
+
+
+//   return supabaseResponse
+// }
 
 export async function middleware(request: NextRequest) {
-  // update user's auth session
-  return await updateSession(request)
+  // Update user's auth session
+  const { userProfiles, supabaseResponse } = await updateSession(request)
+
+
+  if (userProfiles == null && !['/login', '/register'].includes(new URL(request.url).pathname)) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+  else if (userProfiles != null && ['/login', '/register'].includes(new URL(request.url).pathname)) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  return supabaseResponse
 }
 
 export const config = {

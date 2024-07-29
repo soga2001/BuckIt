@@ -13,6 +13,7 @@ import AppleIcon from '@mui/icons-material/Apple';
 import { useState } from 'react';
 import { Message } from 'primereact/message';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { Metadata } from 'next'
 
 export default function LoginPage() {
 
@@ -29,17 +30,16 @@ export default function LoginPage() {
   }
 
   return (
-    <form className='form flex flex-col gap-3 items-center xl:w-10/12 2xl:w-9/12'>
-      <h1 className='w-full text-3xl sm:text-4xl md:text-4xl font-medium'>Sign in to Buck<span className='font-black'>IT</span></h1>
-      <div className='flex flex-col w-full'>
-        <label htmlFor="email">Email:</label>
+    <form className='form flex flex-col gap-4 items-center xl:w-10/12 2xl:w-9/12'>
+      <div className='flex flex-col gap-2 w-full'>
+        <label className="text-2xl" htmlFor="email">Email:</label>
         <div className={`${variables['inputGroup']}`}>
           <EmailIcon className={`${variables['iconStart']}`} />
           <InputText className={`${variables['input']}`} placeholder='Enter your email' id="email" name="email" type="email" required />
         </div>
       </div>
-      <div className='flex flex-col w-full'>
-        <label htmlFor="email">Password:</label>
+      <div className='flex flex-col gap-2 w-full'>
+        <label className="text-2xl" htmlFor="email">Password:</label>
         <div className={`${variables['inputGroup']}`}>
           <PasswordIcon className={`${variables['iconStart']}`} />
           <InputText className={`${variables['input']}`} placeholder='Enter your password' id="password"  name="password" type="password" required />
@@ -82,7 +82,7 @@ export default function LoginPage() {
           <a rel="noopener noreferrer" href="#" className="">   Sign up</a>
         </p>
       </div>
-      
     </form>
+    
   )
 }

@@ -71,11 +71,14 @@ export default function Navbar() {
 
     const endContent = (
         <React.Fragment>
-            {auth ? <div className="flex align-items-center gap-2">
+            {/* {auth ? <div className="flex align-items-center gap-2">
                 <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
                 <span className="font-bold text-bluegray-50">Amy Elsner</span>
-            </div> : <NavLink params={{href: '/login', label: 'Login', activePathName: '/login', activeIcon: <Login className='text-2xl' />, icon: <LoginOutlined className="text-2xl" />}} />}
-            
+            </div> : <NavLink params={{href: '/login', label: 'Login', activePathName: '/login', activeIcon: <Login className='text-2xl' />, icon: <LoginOutlined className="text-2xl" />}} />} */}
+            <div className="flex align-items-center gap-2">
+                <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
+                <span className="font-bold text-bluegray-50">Amy Elsner</span>
+            </div>
         </React.Fragment>
     );
 
