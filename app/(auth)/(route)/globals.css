@@ -1,0 +1,64 @@
+.button {
+    border-radius: 4px;
+    color: #ff00d4;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 8px 16px;
+}
+
+.p-mention-panel {
+    background-color: transparent;
+    border-radius: 4px;
+    max-height: 300px;
+    width: 300px !important;
+    overflow-y: auto;
+    z-index: 2;
+}
+
+.p-mention-panel ul {   
+    max-width: 300px !important;
+    width: 100%;
+    background-color: hwb(0 0% 100%);
+    border-radius: 4px !important;
+}
+
+.p-mention-panel li:nth-child(odd) {
+    width: 300px;
+    background-color: rgba(63, 63, 63, .8);
+}
+
+.p-mention-panel li:nth-child(even) {
+    background-color: rgba(189, 189, 189, .5);
+}
+
+.p-fileupload {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 10px;
+    z-index: 1;
+}
+
+.p-fileupload-content {
+    border: 1px dotted #ccc;
+    background-color: black;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+.p-inputotp-input {
+    border: 1px solid #8d8d8d !important;
+    box-shadow: unset !important;
+    background-color: transparent;
+    border-radius: 4px;
+    font-size: 30px;
+    padding: 0 10px;
+}
+
+.p-inputotp-input:focus {
+    border: 1px solid #ff00d4 !important;
+}

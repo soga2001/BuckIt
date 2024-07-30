@@ -1,6 +1,7 @@
 'use client'
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Head from "next/head";
 // import "./globals.css";
 import Link from 'next/link'
 import { usePathname } from "next/navigation";
@@ -24,11 +25,16 @@ export default function Layout({
   const login = pathname === '/login' ? 'in to' : 'up for'
 
   return (
-    <div className='grid md:grid-cols-2 md:items-center'>
-      <div className="ml-5 max-[600px]:text-4xl max-[1000px]:text-5xl max-[1300px]:text-6xl text-7xl md:justify-self-center">
-        Sign {login} Buck<span className="font-black">IT</span>
+    <div>
+      <Head>
+        <title>Register</title>
+      </Head>
+      <div className={`h-screen py-2 grid md:grid-cols-2 ${pathname === '/login' ? 'content-center' : ''}`}>
+        <div className={`md:m-auto max-[600px]:text-4xl max-[1000px]:text-5xl max-[1300px]:text-6xl text-7xl content-center px-2 `}>
+          Sign {login} Buck<span className="font-black">IT</span>
+        </div>
+        <div className=" h-full min-[700px]:col-span-2 min-[1000px]:col-span-1 p-6 md:p-12">{children}</div>
       </div>
-      <div className="content-center min-[700px]:col-span-2 min-[1000px]:col-span-1 p-6 md:p-12">{children}</div>
     </div>
   );
 }

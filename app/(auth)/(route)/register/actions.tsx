@@ -28,3 +28,23 @@ export async function login(formData: FormData) {
   redirect('/')
 
 }
+
+export async function searchUsers(searchTerm: string) {
+
+  const supabase = createClient()
+
+  if(searchTerm.length < 2) {
+    return {
+      user: null,
+      error: 'Search term must be at least 3 characters long'
+    }
+  }
+
+  const { data: user, error } = await supabase.from('profiles').select().ilike('username', `%${searchTerm}%`)
+  
+  return {
+      user: user,
+      error
+  }
+}
+
