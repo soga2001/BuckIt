@@ -134,3 +134,35 @@ $hover-color: rgba(255, 255, 255, 0.1);
         color: $primary-color;
     }
 }
+
+.select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-width: 150px;
+    width: 100%;
+
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: color .3s ease, background-color .3s ease;
+
+
+    option {
+        
+        &:checked {
+            
+            &:not(:first-child) {
+                color: $primary-color;
+                background-color: $hover-color;
+            }
+        }
+
+        &:hover {
+            box-shadow: 0 0 10px 100px #1882A8 inset;
+        }
+    }
+
+}

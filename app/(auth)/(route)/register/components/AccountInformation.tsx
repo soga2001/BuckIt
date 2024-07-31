@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 
 type AccountInformationProps = {
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    handleDob: (e: React.ChangeEvent<HTMLSelectElement>) => void,
     handleMaskChange?: (e: InputMaskChangeEvent) => void,
     searchUsers: (e: MentionSearchEvent) => void,
     users: UserMetaData[] | UserMetaData[] | undefined
@@ -41,9 +42,7 @@ type AccountInformationProps = {
 
 
 export default function AccountInformation(props: AccountInformationProps) {
-    const { handleChange, handleMaskChange, searchUsers, users, data } = props
-
-    console.log(data)
+    const { handleChange, handleDob, handleMaskChange, searchUsers, users, data } = props
 
     const itemTemplate = (user: UserMetaData) => {
         const src = user?.avatar_url ? user.avatar_url : ''
@@ -121,7 +120,7 @@ export default function AccountInformation(props: AccountInformationProps) {
                     </div>
                 </div>
                 <div>
-                    <Dob />
+                    <Dob dobChange={handleDob} />
                 </div>
             </form>
         </div>

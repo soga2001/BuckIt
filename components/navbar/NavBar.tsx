@@ -11,8 +11,6 @@ import {
 } from '@mui/icons-material';
 
 
-import "primereact/resources/themes/lara-light-cyan/theme.css";
-
 import NavLink from '../NavLink';
 
 
@@ -84,7 +82,7 @@ export default function Navbar() {
 
     return (
         <div>
-            <Toolbar start={startContent} center={centerContent} end={endContent} className="bg-black rounded-none"/>
+            <Toolbar start={startContent} center={centerContent} end={endContent} className="bg-black py-2 px-4 rounded-none"/>
         </div>
     );
 }

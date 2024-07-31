@@ -70,19 +70,6 @@ const QontoStepIconRoot = styled('div')<{ ownerState: { active?: boolean } }>(
   }),
 );
 
-function QontoStepIcon(props: StepIconProps) {
-  const { active, completed, className } = props;
-
-  return (
-    <QontoStepIconRoot ownerState={{ active }} className={className}>
-      {completed ? (
-        <Check className="QontoStepIcon-completedIcon" />
-      ) : (
-        <div className="QontoStepIcon-circle" />
-      )}
-    </QontoStepIconRoot>
-  );
-}
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -185,7 +172,7 @@ export default function Register() {
         });
     }
 
-    const saveAccountInformation = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const saveAccountInformation = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         console.log(name, value)
         setAccountInformation({
@@ -194,6 +181,16 @@ export default function Register() {
         });
 
         console.log(accountInformation)
+    }
+
+    const handleDOB = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const { name, value } = e.target;
+      console.log(name, value)
+      setAccountInformation({
+          ...accountInformation,
+          [name]: value,
+      });
+
     }
 
     const handleMaskChange = (e: InputMaskChangeEvent) => {
@@ -217,7 +214,7 @@ export default function Register() {
 
     const components = [ 
         <LoginInformation data={loginInformation} handleChange={saveLogin} />, 
-        <AccountInformation data={accountInformation} handleChange={saveAccountInformation} handleMaskChange={handleMaskChange} searchUsers={bioChange} users={users} />, 
+        <AccountInformation data={accountInformation} handleChange={saveAccountInformation} handleDob={handleDOB} handleMaskChange={handleMaskChange} searchUsers={bioChange} users={users} />, 
         <UploadAvatar />, 
         <VerifyAccount email={loginInformation.email} /> 
     ];

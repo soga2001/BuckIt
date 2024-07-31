@@ -3,7 +3,13 @@ import variables from '@/styles/variables.module.scss'
 
 import { useEffect, useState } from 'react'
 
-export default function Dob() {
+type DobProps = {
+    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
+}
+
+export default function Dob(props: DobProps) {
+
+    const { onChange } = props;
 
     const months = [
         'January',
@@ -39,35 +45,36 @@ export default function Dob() {
 
     const currentYear = new Date().getFullYear()
 
-    const [month, setMonth] = useState<string>('')
-    const [day, setDay] = useState<string>('')
-    const [year, setYear] = useState<string>('')
+    const [month, setMonth] = useState<string>('0')
+    const [day, setDay] = useState<string>('0')
+    const [year, setYear] = useState<string>('0')
 
     const handleDayChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setDay(e.target.value)
+        onChange(e);
     }
 
     const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        onChange(e);
         setMonth(e.target.value)
         setTotalDays(defaultDays[parseInt(e.target.value)])
-        if(day !== '' && parseInt(day) > totalDays) {
-            setDay('')
+        const tempDay = parseInt(day)
+        if(tempDay !== 0 && tempDay > totalDays) {
+            setDay('0')
         }
 
     }
 
     const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setYear(e.target.value)
-        if(year !== '' && month !== '') {
-            console.log('there',year, month)
+        onChange(e);
+        if(parseInt(year) !== 0 && parseInt(month) !== 0) {
             const tempDays = new Date(parseInt(e.target.value), parseInt(month), 0).getDate()
-            console.log(tempDays)
             setTotalDays(tempDays)
         }
     }
 
     useEffect(() => {
-        console.log('here',totalDays)
     }, [totalDays, day, month, year])
 
     return (
@@ -78,8 +85,8 @@ export default function Dob() {
                 <div className="flex flex-col gap-2">
                     <label htmlFor="month">Month</label>
                     <div className={`${variables['inputGroup']} w-full !p-0 !pr-2`}>
-                        <select value={month} onChange={handleMonthChange} defaultValue="Select a month" className={`${variables['input']} !bg-black w-full`} name="month" id="month">
-                            <option value="Select a month"  disabled>Select Month</option>
+                        <select value={month} onChange={handleMonthChange} className={`${variables['input']} ${variables['select']} !bg-black w-full`} name="month" id="month">
+                            <option value="0"  disabled>Select Month</option>
                             {months.map((month, index) => ( <option key={index} value={index + 1}>{month}</option>))}
                         </select>
                     </div>
@@ -87,8 +94,8 @@ export default function Dob() {
                 <div className="flex flex-col gap-2">
                     <label htmlFor="day">Day</label>
                     <div className={`${variables['inputGroup']} w-full  !p-0 !pr-2`}>
-                        <select value={day} onChange={handleDayChange} defaultValue="Select a day" className={`${variables['input']} !bg-black w-full`} name="year" id="year">
-                            <option value="Select a day" disabled>Select Day</option>
+                        <select value={day} onChange={handleDayChange}  className={`${variables['input']} ${variables['select']} !bg-black w-full`} name="year" id="year">
+                            <option value="0" disabled>Select Day</option>
                             {Array.from({ length: totalDays }, (_, i) => i + 1).map((day) => ( <option key={day} value={day}>{day}</option>))}
                         </select>
                     </div>
@@ -96,8 +103,8 @@ export default function Dob() {
                 <div className="flex flex-col gap-2">
                     <label htmlFor="year">Year</label>
                     <div className={`${variables['inputGroup']} w-full  !p-0 !pr-2`}>
-                        <select value={year} onChange={handleYearChange} defaultValue="Select a year" className={`${variables['input']} !bg-black w-full`} name="year" id="year">
-                            <option value="Select a year" disabled>Select Year</option>
+                        <select value={year} onChange={handleYearChange} className={`${variables['input']} ${variables['select']} !bg-black w-full`} name="year" id="year">
+                            <option value="0" disabled>Select Year</option>
                             {Array.from({ length: 100 }, (_, i) => currentYear - i ).map((year) => ( <option key={year} value={year}>{year}</option>))}
                         </select>
                     </div>
