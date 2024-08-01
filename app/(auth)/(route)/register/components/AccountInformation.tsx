@@ -30,8 +30,7 @@ type AccountInformationProps = {
         bio: string;
         location: string;
         website: string;
-        phoneNumber: string;
-        maskedPhoneNumber: string;
+        phone: string;
         avatar_url: string;
         year: string;
         month: string;
@@ -43,6 +42,11 @@ type AccountInformationProps = {
 
 export default function AccountInformation(props: AccountInformationProps) {
     const { handleChange, handleDob, handleMaskChange, searchUsers, users, data } = props
+
+    const changeDOB = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        handleDob(e);
+
+    }
 
     const itemTemplate = (user: UserMetaData) => {
         const src = user?.avatar_url ? user.avatar_url : ''
@@ -82,7 +86,7 @@ export default function AccountInformation(props: AccountInformationProps) {
                     </div>
                 </div>
                 <div className='flex flex-col gap-2 w-full'>
-                    <label className="text-xl" htmlFor="bio">Bio:</label>
+                    <label className="text-xl" htmlFor="bio">Bio <span className='italic'>(optional)</span>:</label>
                     <div className={`${variables['inputGroup']}`}>
                         <Mention id="bio" name="bio" defaultValue={data.bio} maxLength={120} className={`${variables['mention']} bg-black w-full`} onChange={handleChange} suggestions={users} onSearch={searchUsers} field="username" 
                             placeholder="Enter @ to mention people" rows={3} itemTemplate={itemTemplate} />
@@ -109,18 +113,11 @@ export default function AccountInformation(props: AccountInformationProps) {
                     <div className={`${variables['inputGroup']}`}>
                         <Phone className={`${variables['iconStart']}`} />
                         {/* <InputText onChange={handleChange} className={`${variables['input']}`} placeholder='Enter your email' id="email" name="email" type="email" required /> */}
-                        <InputMask defaultValue={data.phoneNumber} onChange={handleMaskChange} className={`${variables['input']}`} name='phone' id="phone" mask="(999) 999-9999" placeholder="(999) 999-9999"></InputMask>
-                    </div>
-                </div>
-                <div className='flex flex-col gap-2 w-full'>
-                    <label className="text-xl" htmlFor="phoneNumber">Date of birth:</label>
-                    <div className={`${variables['inputGroup']}`}>
-                        <Phone className={`${variables['iconStart']}`} />
-                        <InputMask defaultValue={data.phoneNumber} onChange={handleMaskChange} className={`${variables['input']}`} name='phone' id="phone" mask="(999) 999-9999" placeholder="(999) 999-9999"></InputMask>
+                        <InputMask onChange={handleMaskChange} className={`${variables['input']}`} name='phone' id="phone" mask="(999) 999-9999" placeholder="(999) 999-9999"></InputMask>
                     </div>
                 </div>
                 <div>
-                    <Dob dobChange={handleDob} />
+                    <Dob data={{day: data.day, month: data.month, year: data.year}} dobChange={changeDOB} />
                 </div>
             </form>
         </div>

@@ -1,17 +1,15 @@
 'use client'
 import styles from './styles.module.scss'
 import { Toast } from 'primereact/toast';
-import { FileUpload, FileUploadHeaderTemplateOptions, FileUploadSelectEvent, FileUploadUploadEvent, ItemTemplateOptions,} from 'primereact/fileupload';
+import { FileUpload, FileUploadHeaderTemplateOptions, FileUploadUploadEvent, ItemTemplateOptions,} from 'primereact/fileupload';
 import { ProgressBar } from 'primereact/progressbar';
-import { Button } from 'primereact/button';
 import { Tooltip } from 'primereact/tooltip';
 import ImageIcon from '@mui/icons-material/Image';
 import { Close, Upload } from '@mui/icons-material';
-import { Tag } from 'primereact/tag';
 import { useEffect, useRef, useState } from 'react';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 
-export default function TemplateDemo() {
+export default function UploadAvatar() {
 
     const [file, setFile] = useState<File | null>(null);
     const [fileURL, setFileURL] = useState<string | null>(null);
@@ -82,8 +80,8 @@ export default function TemplateDemo() {
     const emptyTemplate = () => {
         return (
             <div className="flex flex-col items-center !bg-black">
-                <Upload className='border rounded-full h-32 w-32 p-3' />
-                <span style={{ fontSize: '1.2em', color: 'var(--text-color-secondary)' }} className="my-5">
+                <Upload className='border-2 text-white rounded-full h-32 w-32 p-3' />
+                <span className="my-5 text-white font-bold">
                     Drag and Drop Image Here
                 </span>
             </div>

@@ -5,6 +5,28 @@ import { redirect } from 'next/navigation'
 
 import { createClient } from '@/utils/supabase/supabaseServer'
 
+/*
+const [loginInformation, setLoginInformation] = React.useState({
+        email: '',
+        password: '',
+        confirmPassword: '',
+    });
+
+    const [accountInformation, setAccountInformation] = React.useState({
+        fullname: '',
+        username: '',
+        bio: '',
+        location: '',
+        website: '',
+        phoneNumber: '',
+        maskedPhoneNumber: '',
+        avatar_url: '',
+        year: '0',
+        month: '0',
+        day: '0',
+    });
+*/
+
 export async function login(formData: FormData) {
   const supabase = createClient()
 

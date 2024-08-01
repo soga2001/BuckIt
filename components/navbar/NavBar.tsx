@@ -10,13 +10,20 @@ import {
     Explore, ExploreOutlined
 } from '@mui/icons-material';
 
+import { authReducer, authSlice } from '@/lib/features/authSlice';
+
 
 import NavLink from '../NavLink';
+import { useSelector } from 'react-redux';
 
 
 export default function Navbar() {
 
-    const [auth, setAuth] = React.useState(false);
+    // get state from authSlice
+//   const authState = useSelector((state: any) => state.auth.authState)
+
+    // const [auth, setAuth] = React.useState(authState);   
+
 
     const startContent = (
         <React.Fragment>
@@ -81,8 +88,8 @@ export default function Navbar() {
     );
 
     return (
-        <div>
-            <Toolbar start={startContent} center={centerContent} end={endContent} className="bg-black py-2 px-4 rounded-none"/>
+        <div className='sticky top-0 z-50 backdrop-blur-lg bg-black/30'>
+            <Toolbar start={startContent} center={centerContent} end={endContent} className="bg-transparent py-2 px-4 rounded-none"/>
         </div>
     );
 }

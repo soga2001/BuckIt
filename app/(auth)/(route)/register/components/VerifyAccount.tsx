@@ -26,7 +26,7 @@ export default function VerifyAccount(props: {email: string}) {
             <div className="flex flex-col gap-3 my-10 items-center">
                 <p className="font-bold text-4xl mb-2">Authenticate Your Account</p>
                 <p className="text-color-secondary block mb-5">Please enter the code sent to your phone.</p>
-                <InputOtp name='otp' length={6} value={token} onChange={(e) => setTokens(e.value)} integerOnly/>
+                <InputOtp name='otp' length={6} value={token} onChange={(e) => setTokens((e.value) as string)} integerOnly/>
                 
                 {/* <InputOtp name='otp' length={6} integerOnly/> */}
 

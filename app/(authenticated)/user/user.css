@@ -1,0 +1,10 @@
+.avatar-img {
+    /* width: 200px !important;
+    height: 200px !important; */
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+.p-image-preview-indicator {
+    background: rgba(0, 0, 0, 0.7);
+}

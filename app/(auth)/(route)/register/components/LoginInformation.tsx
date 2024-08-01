@@ -5,6 +5,8 @@ import PasswordIcon from '@mui/icons-material/Password';
 import { InputText } from 'primereact/inputtext';
 import Google from '@mui/icons-material/Google';
 import Apple from '@mui/icons-material/Apple';
+import { Password } from 'primereact/password';
+
 
 type LoginInformationProps = {
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
@@ -17,7 +19,7 @@ type LoginInformationProps = {
 
 export default function LoginInformation(props: LoginInformationProps) {
 
-    const { handleChange } = props
+    const { handleChange, data } = props
 
     return (
         <form className={`${styles['form']} flex flex-col gap-4 items-center w-full`}>
@@ -26,21 +28,25 @@ export default function LoginInformation(props: LoginInformationProps) {
                 <label className="text-2xl" htmlFor="email">Email:</label>
                 <div className={`${variables['inputGroup']}`}>
                     <EmailIcon className={`${variables['iconStart']}`} />
-                    <InputText onChange={handleChange} className={`${variables['input']}`} placeholder='Enter your email' id="email" name="email" type="email" required />
+                    <InputText value={data.email} onChange={handleChange} className={`${variables['input']}`} placeholder='Enter your email' id="email" name="email" type="email" required />
                 </div>
             </div>
             <div className='flex flex-col gap-2 w-full'>
                 <label className="text-2xl" htmlFor="email">Password:</label>
                 <div className={`${variables['inputGroup']}`}>
-                <PasswordIcon className={`${variables['iconStart']}`} />
-                <InputText onChange={handleChange} className={`${variables['input']}`} placeholder='Enter your password' id="password"  name="password" type="password" required />
+                    <PasswordIcon className={`${variables['iconStart']}`} />
+                    <InputText value={data.password} onChange={handleChange} className={`${variables['input']}`} placeholder='Enter your password' id="password"  name="password" type="password" required />
                 </div>
+                <small id="username-help">
+                    Password must be longer than 6 characters
+                </small>
             </div>
             <div className='flex flex-col gap-2 w-full'>
                 <label className="text-2xl" htmlFor="email">Confirm Password:</label>
                 <div className={`${variables['inputGroup']}`}>
                 <PasswordIcon className={`${variables['iconStart']}`} />
-                <InputText onChange={handleChange} className={`${variables['input']}`} placeholder='Confirm your password' id="confirmPassword"  name="confirmPassword" type="password" required />
+                <InputText value={data.confirmPassword} onChange={handleChange} className={`${variables['input']}`} placeholder='Confirm your password' id="confirmPassword"  name="confirmPassword" type="password" required />
+                
                 </div>
             </div>
             <div className={`${styles['separator']} my-5`}>
