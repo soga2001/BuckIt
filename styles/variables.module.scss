@@ -2,7 +2,8 @@ $primary-color: #ff00d4;
 $secondary-color: #ffffff;
 $tertiary-color: #0000ff;
 
-$hover-color: rgba(255, 255, 255, 0.1);
+$hover-color: rgba(255, 255, 255, 0.2);
+$hover-color-rgb: 255, 255, 255;
  
 :export {
   primaryColor: $primary-color;
@@ -112,28 +113,63 @@ $hover-color: rgba(255, 255, 255, 0.1);
 }
 
 .nav-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    min-width: 150px;
-    width: 100%;
-
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: color .3s ease, background-color .3s ease;
+    font-size: 1.2rem;
+    color: $secondary-color;
 
     &:hover {
         color: $primary-color;
-        background-color: $hover-color;
+
+        .nav-item {
+            
+
+            .nav-button {
+                
+                .nav-icon {
+                    color: $primary-color;
+                    
+                }
+            }
+        }
     }
 
     &.active {
         color: $primary-color;
+        font-weight: bold;
+
+        .nav-item {
+
+            .nav-button {
+                
+                .nav-icon {
+
+                    * {
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+    }
+
+    .nav-item {
+
+        &:hover {
+            background-color: $hover-color;
+        }
+
+        .nav-button {
+            
+            .nav-icon {
+
+                * {
+                    color: $secondary-color;
+                    font-size: 1.8rem;
+                }
+            }
+        }
     }
 }
+
+
 
 .select {
     display: flex;
@@ -165,4 +201,27 @@ $hover-color: rgba(255, 255, 255, 0.1);
         }
     }
 
+}
+
+
+
+.filled {
+    background-color: $primary-color;
+    color: $secondary-color;
+
+    &:hover {
+        background-color: $hover-color;
+        color: $primary-color;
+    }
+}
+
+.outlined {
+    background-color: transparent;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+
+    &:hover {
+        background-color: $hover-color;
+        border-color: $primary-color;
+    }
 }

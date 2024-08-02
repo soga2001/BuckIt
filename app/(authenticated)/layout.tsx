@@ -15,7 +15,8 @@ import Navbar from '@/components/navbar/Navbar';
 
 import { createClient } from '@/utils/supabase/supabaseServer'
 import { UserMetaData } from "../assets/interface/users";
-import { use } from "react";
+
+import VerticalNav from "@/components/navbar/VerticalNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,11 +49,14 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.className} h-screen`}>
-        <Navbar />
-        <PrimeReactProvider>
-          {children}
-        </PrimeReactProvider>
+      <body className={` h-screen`}>
+        <VerticalNav />
+        <div className="main">
+          <PrimeReactProvider>
+            {children}
+          </PrimeReactProvider>
+        </div>
+        
       </body>
     </html>
   );

@@ -9,16 +9,17 @@ const inter = Inter({ subsets: ["latin"] });
 
 
 export default function Layout({
-  children
+  children,
+  activity,
 }: Readonly<{
   children: React.ReactNode;
+  activity: React.ReactNode;
 }>) {
 
   return (
-    <div>
-      <div className={`h-screen `}>
-
-        <div className=" h-full min-[700px]:col-span-2 min-[1000px]:col-span-1">{children}</div>
+    <div> 
+      <div className={`h-full`}>
+        <div className=" h-full">{children}</div>
       </div>
     </div>
   );

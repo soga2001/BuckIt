@@ -7,6 +7,8 @@ export async function getUser(searchTerm: string) {
     const { data: user, error } = await supabase.from('profiles').select().eq('username', searchTerm).single()
 
     
+    
+
     return {
         user: user,
         error: error

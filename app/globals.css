@@ -53,7 +53,15 @@ body {
   border-radius: 10px;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  /* background: #b30000;  */
+
+.main {
+  margin-left: 320px !important;
+}
+
+@media screen and (max-width: 901px) {
+  .main {
+    margin-left: 0 !important;
+    margin-top: 30px;
+  }
+  
 }

@@ -1,3 +1,4 @@
+import { Skeleton } from '@mui/material';
 import { getUser } from './action';
 
 import LoadingProfile from './components/LoadingProfile';
@@ -31,10 +32,8 @@ export default async function Page({ params, children }: { params: { username: s
 
 
     return (
-        <div className='h-full w-full mx-auto'>
-            <Suspense fallback={<LoadingProfile />}>
+        <div className='h-full w-full'>
                 <UserProfile params={params} />
-            </Suspense>
         </div>
     )
 }

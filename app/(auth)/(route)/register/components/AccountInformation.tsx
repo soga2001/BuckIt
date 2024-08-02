@@ -13,7 +13,7 @@ import '../../globals.css';
         
 
 
-import {AlternateEmail, Person, LocationCity, Phone, Link } from '@mui/icons-material';
+import {AlternateEmail, Person, LocationCity, Phone, Link, LocationOn } from '@mui/icons-material';
 import { UserMetaData } from '@/app/assets/interface/users';
 import { searchUsers } from '../actions';
 import { useEffect } from 'react';
@@ -86,29 +86,6 @@ export default function AccountInformation(props: AccountInformationProps) {
                     </div>
                 </div>
                 <div className='flex flex-col gap-2 w-full'>
-                    <label className="text-xl" htmlFor="bio">Bio <span className='italic'>(optional)</span>:</label>
-                    <div className={`${variables['inputGroup']}`}>
-                        <Mention id="bio" name="bio" defaultValue={data.bio} maxLength={120} className={`${variables['mention']} bg-black w-full`} onChange={handleChange} suggestions={users} onSearch={searchUsers} field="username" 
-                            placeholder="Enter @ to mention people" rows={3} itemTemplate={itemTemplate} />
-                    </div>
-                </div>
-                {/* <div className='flex flex-col gap-2 w-full'>
-                    <label className="text-xl" htmlFor="location">Location:</label>
-                
-                    <div className={`${variables['inputGroup']}`}>
-                        <EmailIcon className={`${variables['iconStart']}`} />
-                        <InputText onChange={handleChange} className={`${variables['input']}`} placeholder='Enter your email' id="email" name="email" type="email" required />
-                    </div>
-                </div> */}
-                {/* <div className='flex flex-col gap-2 w-full'>
-                    <label className="text-xl" htmlFor="website">Website:</label>
-
-                    <div className={`${variables['inputGroup']}`}>
-                        <Link className={`${variables['iconStart']}`} />
-                        <InputText defaultValue={data.website} onChange={handleChange} className={`${variables['input']}`} placeholder='Enter a website' id="website" name="website" type="website" required />
-                    </div>
-                </div> */}
-                <div className='flex flex-col gap-2 w-full'>
                     <label className="text-xl" htmlFor="phoneNumber">Phone Number:</label>
                     <div className={`${variables['inputGroup']}`}>
                         <Phone className={`${variables['iconStart']}`} />
@@ -119,6 +96,36 @@ export default function AccountInformation(props: AccountInformationProps) {
                 <div>
                     <Dob data={{day: data.day, month: data.month, year: data.year}} dobChange={changeDOB} />
                 </div>
+                <hr className='my-3'/>
+                <div className=''>
+                    <p className="text-md text-gray-400">The below fields are optional and you can sign up without filling them in.</p>
+                </div>
+                <div className='flex flex-col gap-2 w-full'>
+                    <label className="text-xl" htmlFor="bio">Bio:</label>
+                    <div className={`${variables['inputGroup']}`}>
+                        <Mention id="bio" name="bio" defaultValue={data.bio} maxLength={120} className={`${variables['mention']} bg-black w-full`} onChange={handleChange} suggestions={users} onSearch={searchUsers} field="username" 
+                            placeholder="Enter @ to mention people" rows={3} itemTemplate={itemTemplate} />
+                    </div>
+                </div>
+                
+                <div className='flex flex-col gap-2 w-full'>
+                    <label className="text-xl" htmlFor="location">Location:</label>
+                
+                    <div className={`${variables['inputGroup']}`}>
+                        <LocationOn className={`${variables['iconStart']}`} />
+                        <InputText onChange={handleChange} className={`${variables['input']}`} placeholder='Enter your location' id="email" name="email" type="email" required />
+                    </div>
+                </div>
+                <div className='flex flex-col gap-2 w-full'>
+                    <label className="text-xl" htmlFor="website">Website:</label>
+
+                    <div className={`${variables['inputGroup']}`}>
+                        <Link className={`${variables['iconStart']}`} />
+                        <InputText defaultValue={data.website} onChange={handleChange} className={`${variables['input']}`} placeholder='Enter a website' id="website" name="website" type="website" required />
+                    </div>
+                </div>
+                
+                
             </form>
         </div>
     )
