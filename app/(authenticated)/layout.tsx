@@ -50,12 +50,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={` h-screen`}>
-        <VerticalNav />
-        <div className="main">
-          <PrimeReactProvider>
-            {children}
-          </PrimeReactProvider>
-        </div>
+        <PrimeReactProvider>
+          <VerticalNav />
+          <div className="main">
+              {children}
+          </div>
+        </PrimeReactProvider>
         
       </body>
     </html>

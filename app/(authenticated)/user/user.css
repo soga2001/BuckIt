@@ -1,6 +1,4 @@
 .avatar-img {
-    /* width: 200px !important;
-    height: 200px !important; */
     border-radius: 50%;
     overflow: hidden;
     margin: auto;
@@ -9,4 +7,5 @@
 .p-image-preview-indicator {
     background: rgba(0, 0, 0, 0.7);
     border-radius: 50%;
+    aspect-ratio: 1;
 }

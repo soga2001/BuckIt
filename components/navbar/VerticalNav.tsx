@@ -2,18 +2,9 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import NavLink from '../NavLink';
@@ -52,12 +43,30 @@ export default function ResponsiveDrawer(props: Props) {
 
   const desktopDrawer = (
     <div className='h-full w-full' style={{display: 'grid', gridTemplateRows: 'auto 1fr auto'}}>
-        <div>
+        {/* <div>
             <Toolbar>
                 <Typography variant="h5" noWrap component="div">
                 Buck<span className='font-black'>IT</span>
             </Typography>
             </Toolbar>
+        </div> */}
+        <div className="flex align-items-center justify-content-between px-4 pt-3 flex-shrink-0">
+            <span className="inline-flex align-items-center gap-2">
+                <svg width="35" height="40" viewBox="0 0 35 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="..."
+                        fill="var(--primary-color)"
+                    />
+                    <path
+                        d="..."
+                        fill="var(--text-color)"
+                    />
+                </svg>
+                <span className="font-semibold text-2xl text-primary">Buck<span className='font-bold'>IT</span></span>
+            </span>
+            <span>
+                {/* <Button type="button" ref={closeIconRef} onClick={(e) => hide(e)} icon="pi pi-times" rounded outlined className="h-2rem w-2rem"></Button> */}
+            </span>
         </div>
         <List>
             <NavLink params={{href: '/', label: 'Home', activePathName: '/', activeIcon: <Cottage className="text-2xl"/>, icon: <CottageOutlined className="text-2xl" />}} />
@@ -71,7 +80,7 @@ export default function ResponsiveDrawer(props: Props) {
   );
 
   const mobileDrawer = (
-    <div className='h-full w-full' style={{display: 'grid', gridTemplateRows: 'auto 1fr auto'}}>
+    <div className='h-full w-full' style={{display: 'grid', gridTemplateRows: '1fr auto'}}>
         {/* <div>
             <Toolbar>
                 <Typography variant="h5" noWrap component="div">
@@ -111,7 +120,8 @@ export default function ResponsiveDrawer(props: Props) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { md: 'none' } }}
           >
-            <MenuIcon />
+            {/* <MenuIcon /> */}
+            <Avatar size='normal' image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -135,7 +145,7 @@ export default function ResponsiveDrawer(props: Props) {
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: 'rgb(20,20,20)', color: 'white'  },
           }}
         >
-          {desktopDrawer}
+          {mobileDrawer}
         </Drawer>
         <Drawer
           variant="permanent"

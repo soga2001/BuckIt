@@ -32,8 +32,10 @@ export default async function Page({ params, children }: { params: { username: s
 
 
     return (
-        <div className='h-full w-full'>
+        <Suspense fallback={<LoadingProfile />}>
+            <div className='h-full w-full'>
                 <UserProfile params={params} />
-        </div>
+            </div>
+        </Suspense>
     )
 }

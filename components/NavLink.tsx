@@ -17,12 +17,12 @@ export default function NavLink({params}: {params: {href: string, label: string,
     console.log(segment)
 
     return (
-      <Link href={href} className={`${variables['nav-link']} ${classnames} ${pathname === activePathName ? variables['active'] : ''}`}>
-        <ListItem className={`${variables['nav-item']}`} disablePadding>
+      <Link href={href} className={`${variables['nav-link']}  ${pathname === activePathName ? variables['active'] : ''}`}>
+        <ListItem className={`${variables['nav-item']} ${classnames}`} disablePadding>
           <ListItemButton className={`${variables['nav-button']}`}>
-            <ListItemIcon className={`${variables['nav-icon']}`}>
+            {icon ? <ListItemIcon className={`${variables['nav-icon']}`}>
               {pathname === activePathName ? activeIcon : icon}
-            </ListItemIcon>
+            </ListItemIcon> : null}
               {label}
           </ListItemButton>
         </ListItem>

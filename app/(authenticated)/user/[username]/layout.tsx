@@ -1,3 +1,4 @@
+import NavLink from "@/components/NavLink";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Head from "next/head";
@@ -20,6 +21,15 @@ export default function Layout({
     <div> 
       <div className={`h-full`}>
         <div className=" h-full">{children}</div>
+      </div>
+      <div>
+        <ul className="flex flex-row justify-center">
+          <NavLink params={{href: '/', label: 'Home', activePathName: '/', classnames:"text-center w-32"}}/>
+          <NavLink params={{href: '/', label: 'Home', activePathName: '/'}}/>
+        </ul>
+      </div>
+      <div>
+        {activity}
       </div>
     </div>
   );
