@@ -1,25 +1,47 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 <main class="main">
   <div class="content">
-    Login Page
+    <form class="form">
+        <div class="flex-column">
+          <label>Email </label></div>
+            <p-inputGroup>
+              <p-inputGroupAddon>
+                  <i class="pi pi-envelope"></i>
+              </p-inputGroupAddon>
+              <input pInputText placeholder="Username" />
+            </p-inputGroup>
+        
+        <div class="flex-column">
+          <label>Password </label></div>
+          <p-inputGroup>
+              <p-inputGroupAddon>
+                  <i class="pi pi-user"></i>
+              </p-inputGroupAddon>
+              <p-password placeholder="Password" [(ngModel)]="password" name="password" [feedback]="false" [toggleMask]="true"/>
+          </p-inputGroup>
+        
+        <div class="flex-row">
+          <div>
+          </div>
+          <span class="span">Forgot password?</span>
+        </div>
+        <button class="button-submit">Sign In</button>
+        <p class="p">Don't have an account? <span class="span">Sign Up</span>
+
+        </p><p class="p line">Or With</p>
+
+        <div class="flex-row">
+          <button class="btn google">
+            <i class="pi pi-google"></i>
+            Google 
+          </button><button class="btn apple">
+            <i class="pi pi-apple"></i>
+            Apple   
+          </button>
+      </div>
+    </form>
   </div>
 </main>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
 <router-outlet />
