@@ -29,3 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## To Create a new component within a module ##
 - `ng g module {Module Name}` - To create a Module if there isn't one already
 - `ng g component {Component Name}` - To create a new component
+
+## To Install Supabase ##
+- `npm install @supabase/supabase-js` - install supabase
+- `ng g s supabase` - Intitalize supabase client
