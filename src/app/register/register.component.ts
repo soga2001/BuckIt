@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterModule, Router } from '@angular/router';
+import { RouterOutlet, RouterModule, Router, RouterLinkActive } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { StepsModule } from 'primeng/steps';
 import { ButtonModule } from 'primeng/button';
@@ -25,20 +25,28 @@ export class RegisterComponent implements OnInit {
   activeStep: number = 0;
   items: MenuItem[] = [
     {
-      label: "Login",
-      routerLink: ""
+      label: "Login Information",
+      routerLink: "",
+      routerLinkActiveOptions: { exact: true },
+      iconClass: "pi pi-user",
     },
     {
       label: "Personal Information",
-      routerLink: "personal-information"
+      routerLink: "personal-information",
+      iconClass: "pi pi-user",
+      routerLinkActiveOptions: { exact: true },
     },
     {
       label: "Verify Account",
-      routerLink: "verify-account"
+      routerLink: "verify-account",
+      iconClass: "pi pi-user",
+      routerLinkActiveOptions: { exact: true },
     },
     {
       label: "Upload Avatar",
-      routerLink: "upload-avatar"
+      routerLink: "upload-avatar",
+      iconClass: "pi pi-user",
+      routerLinkActiveOptions: { exact: true },
     },
   ]
 
@@ -49,9 +57,13 @@ export class RegisterComponent implements OnInit {
     "/register/upload-avatar",
   ]
 
+  routerLinkActiveOptions = { 
+    exact: true,
+    routerlinkActiveClass: 'active'
+  };
+
   ngOnInit() {
     this.activeStep = this.steps.indexOf(this.router.url);
-    console.log(this.activeStep);
   }
 
   prevStep() {

@@ -1,18 +1,19 @@
-<div>
-    <p-steps [model]="items" [readonly]="true" exact />
-    <div class="flex flex-row justify-center items-center">
+<div class="container">
+    <p-steps class="p-1 sticky top-0" [activeIndex]="activeStep" [model]="items" [readonly]="true" exact routerLinkActive="" />
+    <div class="flex flex-row justify-center outlet">
         <router-outlet />
     </div>
-    <div class="flex justify-between p-2">
+    <div class="flex justify-between px-5">
         <div>
-            @if (activeStep > 0) {
-                <p-button label="Prev" (click)="prevStep()"></p-button>
+            @if (activeStep > 0 && activeStep < 2) {
+                <p-button label="Prev" icon="pi pi-arrow-left" iconPos="left" (click)="prevStep()"></p-button>
             }
         </div>
         
         <div class="justify-end">
             @if (activeStep < items.length - 1) {
-                <p-button label="Next" (click)="nextStep()"></p-button>
+                <!-- <p-button label="Next" (click)="nextStep()"></p-button> -->
+                <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (click)="nextStep()"/>
             }
         </div>
         

@@ -31,7 +31,6 @@
                 color: white;
             }
 
-
         }
     }
 
@@ -53,14 +52,56 @@
 
         }
     }
+
 }
+
+p-input-group{
+    border: 1px solid white;
+    width: 100%;
+    
+    &:has(p-inputgroup-addon) input {
+        padding-left: 0px !important;
+    }
+
+    p-password, .p-password.p-inputwrapper {
+        width: 100%;
+    }
+
+    input {
+        border: none !important;
+        width: 100%;
+        padding-left: 10px !important;
+        background-color: transparent !important;
+
+
+        &:focus {
+            border: none !important; 
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        &:active {
+            outline: none !important;
+        }
+    }
+
+    p-inputgroup-addon {
+        background-color: transparent;
+        border: none;
+    }
+
+    &:focus-within {
+        border: 1px solid fuchsia;
+
+        p-inputgroup-addon {
+            color: fuchsia;
+        }
+    }
+}
+
 
 .p-button {
     background-color: transparent !important;
     color: white !important;
     border-color: fuchsia !important;
-}
-
-.router-link-active-exact {
-    color: red;
 }

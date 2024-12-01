@@ -1,6 +1,10 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PasswordModule } from 'primeng/password';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 interface City {
@@ -14,6 +18,10 @@ interface City {
   imports: [
     CommonModule,
     FormsModule,
+    InputTextModule,
+    PasswordModule,
+    InputGroupAddonModule,
+    InputGroupModule,
   ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
