@@ -1,3 +1,3 @@
 #!/bin/sh
 
-ng serve -open
+ng serve -o

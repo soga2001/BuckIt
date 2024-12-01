@@ -1,30 +1,24 @@
 <main class="main">
   <div class="content">
+    <div class="">
+      <h1 class="h1 text-center">Sign In</h1>
+    </div>
     <form class="form">
         <div class="flex-column">
-          <label>Email </label></div>
-            <p-inputGroup>
-              <p-inputGroupAddon>
-                  <i class="pi pi-envelope"></i>
-              </p-inputGroupAddon>
-              <input pInputText placeholder="Username" />
-            </p-inputGroup>
+          <label>Email </label>
+        </div>
+        <app-input-component name="email" type="text" icon="pi pi-envelope" />    
         
         <div class="flex-column">
           <label>Password </label></div>
-          <p-inputGroup>
-              <p-inputGroupAddon>
-                  <i class="pi pi-user"></i>
-              </p-inputGroupAddon>
-              <p-password placeholder="Password" [(ngModel)]="password" name="password" [feedback]="false" [toggleMask]="true"/>
-          </p-inputGroup>
+          <app-input-component  [feedback]="true" name="password" type="password" icon="pi pi-lock" />
         
         <div class="flex-row">
           <div>
           </div>
           <span class="span">Forgot password?</span>
         </div>
-        <button class="button-submit">Sign In</button>
+        <button (click)="login()" class="button-submit">Sign In</button>
         <p class="p">Don't have an account? <span class="span">Sign Up</span>
 
         </p><p class="p line">Or With</p>

@@ -1,0 +1,19 @@
+<p-inputGroup>
+    @if (icon != '' && iconPos == 'prepend') {
+        <p-inputgroup-addon>
+            <i [class]="icon"></i>
+        </p-inputgroup-addon>
+    }
+    
+    @if (type == "password"){ 
+        <p-password [placeholder]="placeholder" [(ngModel)]="value" [name]="name" [feedback]="feedback" [toggleMask]="toggleMask"/>
+    }
+    @else {
+        <input [type]="type" [(ngModel)]="value" pInputText [placeholder]="placeholder" />
+    }
+    @if (icon != '' && iconPos == 'append') {
+        <p-inputgroup-addon>
+            <i [class]="icon"></i>
+        </p-inputgroup-addon>
+    }
+</p-inputGroup>

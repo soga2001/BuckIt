@@ -1,0 +1,20 @@
+<div>
+    <p-steps [model]="items" [readonly]="true" exact />
+    <div class="flex flex-row justify-center items-center">
+        <router-outlet />
+    </div>
+    <div class="flex justify-between p-2">
+        <div>
+            @if (activeStep > 0) {
+                <p-button label="Prev" (click)="prevStep()"></p-button>
+            }
+        </div>
+        
+        <div class="justify-end">
+            @if (activeStep < items.length - 1) {
+                <p-button label="Next" (click)="nextStep()"></p-button>
+            }
+        </div>
+        
+    </div>
+</div>

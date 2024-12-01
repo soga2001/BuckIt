@@ -1,0 +1,45 @@
+p-inputgroup {
+    border: 1px solid white;
+    // border-radius: 10px;
+    display: flex;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+    
+    &:has(p-inputgroup-addon) p-inputtext,
+    &:has(p-inputgroup-addon) p-password {
+        padding-left: 0px;
+    }
+
+    input {
+        border: none;
+        border-radius: 10px;
+        width: 100%;
+        padding-left: 10px;
+        // font-size: 20px;
+
+
+        &:focus {
+            border: none !important; 
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        &:active {
+            outline: none !important;
+        }
+    }
+
+    p-inputgroup-addon {
+        background-color: transparent;
+        border: none;
+    }
+
+    &:focus-within {
+        border: 1px solid fuchsia;
+
+        p-inputgroup-addon {
+            color: fuchsia;
+        }
+    }
+}
