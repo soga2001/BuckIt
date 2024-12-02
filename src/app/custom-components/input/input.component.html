@@ -9,13 +9,14 @@
         <p-password 
             [placeholder]="placeholder" 
             [(ngModel)]="value" 
+            (ngModelChange)="onValueChange($event)"
             [name]="name" 
             [feedback]="feedback" 
             [toggleMask]="toggleMask"
         />
     }
     @else {
-        <input [type]="type" [(ngModel)]="value" pInputText [placeholder]="placeholder" />
+        <input [type]="type" [(ngModel)]="value" (ngModelChange)="onValueChange($event)" pInputText [placeholder]="placeholder" />
     }
     @if (icon != '' && iconPos == 'append') {
         <p-inputgroup-addon>

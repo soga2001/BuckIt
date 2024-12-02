@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InputComponent } from '../../custom-components/input/input.component';
 import { PasswordModule } from 'primeng/password';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputTextModule } from 'primeng/inputtext';
+import type { LoginInfoInterface } from '../../../assets/interface/RegistrationInformation';
+import { RegistrationService } from '../../service/registration.service';
+import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login-information',
@@ -10,12 +15,34 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
   imports: [
     InputComponent, 
     PasswordModule,
-    InputGroupModule,
-    InputGroupAddonModule
+    CommonModule,
+    ButtonModule,
+    InputTextModule,
+    FormsModule,
   ],
   templateUrl: './login-information.component.html',
   styleUrl: './login-information.component.scss'
 })
-export class LoginInformationComponent {
+export class LoginInformationComponent implements OnInit {
+  loginInformation: LoginInfoInterface = {} as LoginInfoInterface;
 
+  constructor(public registrationService: RegistrationService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.loginInformation = this.registrationService.registrationInformation.loginInformation;
+  }
+
+  nextStep() {
+    let valid = false;
+    valid = (this.loginInformation.email != '' && 
+      this.loginInformation.password != '' && 
+      this.loginInformation.confirm_password != '');
+    valid = valid && (this.loginInformation.password === this.loginInformation.confirm_password);
+
+    if(valid) {
+      this.registrationService.registrationInformation.loginInformation = this.loginInformation;
+      this.router.navigate(['/register/personal-information']);
+    }
+  }
+  
 }

@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, Output } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
@@ -31,7 +31,6 @@ export class InputComponent {
   @Input() label: string = '';
   @Input() type: string = '';
   @Input() placeholder: string = '';
-  @Input() value: string = '';
   @Input() name: string = '';
   @Input() helpText: string = '';
 
@@ -56,23 +55,11 @@ export class InputComponent {
   @Input() icon: string = ''; // eg: pi pi-search, pi pi-calendar, pi pi-user
   @Input() iconPos: string = 'prepend'; // prepend | append
 
-  @Output() valueChange: string = '';
+  @Input() value: any;
 
+  @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
-  text1: string | undefined;
-
-    text2: string | undefined;
-
-    number: string | undefined;
-
-    selectedCity: City | undefined;
-
-    cities: City[] = [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' },
-    ];
-  
+  onValueChange(newValue: any) {
+    this.valueChange.emit(newValue);
+  }
 }

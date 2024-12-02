@@ -1,11 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import type { RegistrationInfoInterface } from '../../assets/interface/RegistrationInformation';
+
+// interface RegistrationInformation {
+//   loginInformation: LoginInformation;
+//   personalInformation: PersonalInformation;
+//   avatar: Avatar;
+// }
+
+// interface LoginInformation {
+//   email: string;
+//   password: string;
+//   confirm_password: string;
+// }
+
+// interface PersonalInformation {
+//   username: string;
+//   full_name: string;
+//   phone_number: string;
+//   location: string;
+//   dob: string;
+//   website: string;
+//   bio: string;
+//   private: boolean;
+// }
+
+// interface Avatar {
+//   avatar: string;
+// }
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationService {
-  registrationInformation = {
+  registrationInformation: RegistrationInfoInterface = {
     loginInformation: {
       email: '',
       password: '',
@@ -19,11 +47,27 @@ export class RegistrationService {
       dob: '',
       website: '',
       bio: '',
-      private: '',
+      private: false,
     },
     avatar: {
       avatar: '',
     }
   }
-  constructor() { }
+  // constructor() { }
+
+  private registrationComplete = new Subject<RegistrationInfoInterface>();
+    
+  registrationComplete$ = this.registrationComplete.asObservable();
+
+  getRegistrationInformation() {
+    return this.registrationInformation;
+  }
+
+  setRegistrationInformation(data: RegistrationInfoInterface) {
+    this.registrationInformation = data;
+  }
+
+  completeRegistration() {
+    this.registrationComplete.next(this.registrationInformation);
+  }
 }
