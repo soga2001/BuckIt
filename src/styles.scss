@@ -4,11 +4,12 @@
 @import 'tailwindcss/utilities';
 
 @import "primeicons/primeicons.css";
-
+@import 'material-icons/iconfont/material-icons.css';
 
 * {
     margin: 0;
     padding: 0;
+    color: white;
 }
 
 
@@ -91,14 +92,17 @@ p-input-group{
 
     p-inputgroup-addon {
         background-color: transparent;
-        border: none;
+        border: none !important;
     }
 
     &:focus-within {
         border: 1px solid fuchsia;
 
         p-inputgroup-addon {
-            color: fuchsia;
+             * {
+                color: fuchsia;
+             }
+            // color: fuchsia;
         }
     }
 }

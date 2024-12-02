@@ -1,17 +1,15 @@
 <main class="main">
-  <div class="content">
-    <div class="">
-      <h1 class="h1 text-center">Sign In</h1>
-    </div>
+  <div class="content flex flex-col items-center">
+    <h1 class="text-center font-black text-4xl">Sign In</h1>
     <form class="form">
-        <div class="flex-column">
-          <label>Email </label>
-        </div>
-        <app-input-component name="email" type="text" icon="pi pi-envelope" />    
-        
-        <div class="flex-column">
-          <label>Password </label></div>
-          <app-input-component  [feedback]="true" name="password" type="password" icon="pi pi-lock" />
+      <div class="flex flex-col gap-1">
+        <label class="font-bold">Email</label>
+        <app-input-component [value]="email" (valueChange)="email = $event"  icon="pi pi-envelope" type="text" placeholder="Email" />
+    </div>
+    <div class="flex flex-col gap-1">
+        <label class="font-bold">Password</label>
+        <app-input-component icon="pi pi-lock" [value]="password" (valueChange)="password = $event" type="password" name="password" placeholder="Password" />
+    </div>
         
         <div class="flex-row">
           <div>

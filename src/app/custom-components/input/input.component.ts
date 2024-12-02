@@ -35,6 +35,7 @@ export class InputComponent {
   @Input() placeholder: string = '';
   @Input() name: string = '';
   @Input() helpText: string = '';
+  @Input() classes: string = '';
 
   @Input() disabled: boolean = false;
   @Input() readonly: boolean = false;
@@ -54,9 +55,17 @@ export class InputComponent {
   @Input() feedbackIcon: string = '';
   @Input() feedbackIconClass: string = '';
 
-  // pi is mandatory for icon
-  @Input() icon: string = ''; // eg: pi pi-search, pi pi-calendar, pi pi-user
+  
+  /* Icon properties
+    pi is mandatory for icon if using primeng icons
+      eg: pi pi-search, pi pi-calendar, pi pi-user
+    material icons can be used without prefix
+      eg: home, calendar_month, user
+  */
+  @Input() icon: string = ''; 
   @Input() iconPos: string = 'prepend'; // prepend | append
+  @Input() iconLibrary: string = 'material'; // primeng | material
+  @Input() iconStyle: string = ''; // Sharp | Outlined | Round | ''
 
   @Input() value: any;
 

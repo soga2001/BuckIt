@@ -1,7 +1,14 @@
 <p-input-group>
     @if (icon != '' && iconPos == 'prepend') {
         <p-inputgroup-addon>
-            <i [class]="icon"></i>
+            @if (iconLibrary == 'primeng') {
+                <i [class]="icon"></i>
+            }
+            @else {
+                <i [class]="classes" [ngClass]="[
+                    iconStyle == '' ? 'material-icons' : 'material-icons ' + iconStyle,
+                ]">{{icon}}</i>
+            }
         </p-inputgroup-addon>
     }
     
@@ -23,7 +30,12 @@
     }
     @if (icon != '' && iconPos == 'append') {
         <p-inputgroup-addon>
-            <i [class]="icon"></i>
+            @if (iconLibrary == 'primeng') {
+                <i [class]="icon"></i>
+            }
+            @else {
+                <i class="material-icons">{{icon}}</i>
+            }
         </p-inputgroup-addon>
     }
 </p-input-group>
