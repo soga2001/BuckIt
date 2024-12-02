@@ -56,5 +56,6 @@ main {
   width: 100dvw;
   min-height: 100dvh;
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: minmax(200px, 350px) minmax(500px, 1fr);
+  background-color: black;
 }
