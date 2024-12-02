@@ -25,6 +25,7 @@
     "@primeng/themes": "^18.0.0-rc.1",
     "@supabase/supabase-js": "^2.46.2",
     "express": "^4.18.2",
+    "material-icons": "^1.13.12",
     "primeicons": "^7.0.0",
     "primeng": "^18.0.0-rc.1",
     "rxjs": "~7.8.0",

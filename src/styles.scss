@@ -55,19 +55,23 @@
 
 }
 
+.p-inputgroup .p-inputtext, .p-password.p-inputwrapper ,.p-fluid .p-inputgroup .p-inputtext,
+p-password, .p-password.p-inputwrapper, p-inputmask { width: 100% !important; }
+
 p-input-group{
     border: 1px solid white;
     width: 100%;
     
-    &:has(p-inputgroup-addon) input {
+    &:has(p-inputgroup-addon) input,
+    &:has(p-inputgroup-addon) p-inputmask .p-inputtext {
         padding-left: 0px !important;
     }
 
-    p-password, .p-password.p-inputwrapper {
+    p-password, .p-password.p-inputwrapper, p-inputmask {
         width: 100%;
     }
 
-    input {
+    input, p-inputmask .p-inputtext {
         border: none !important;
         width: 100%;
         padding-left: 10px !important;
@@ -99,6 +103,15 @@ p-input-group{
     }
 }
 
+p-inputotp {
+    input {
+
+        &:focus {
+            border: 1px solid fuchsia !important;
+            outline: none;
+        }
+    }
+}
 
 .p-button {
     background-color: transparent !important;

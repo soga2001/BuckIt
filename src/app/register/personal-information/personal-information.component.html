@@ -1,1 +1,26 @@
-<p>personal-information works!</p>
+<div class="flex flex-col gap-10">
+    <div class="login flex flex-col justify-center gap-3 mx-auto min-w-[500px]">
+        <h1 class="text-3xl text-center font-extrabold">Personal Information</h1>
+        <div class="flex flex-col gap-1">
+            <label class="font-bold">Username<span class="text-red-500">*</span></label>
+            <app-input-component [value]="personalInformation.username" (valueChange)="personalInformation.username = $event"  icon="pi pi-at" type="text" placeholder="Username" />
+        </div>
+        <div class="flex flex-col gap-1">
+            <label class="font-bold">Full Name</label>
+            <app-input-component [value]="personalInformation.full_name" (valueChange)="personalInformation.full_name = $event"  icon="pi pi-user" type="text" placeholder="Full Name" />
+        </div>
+        <div class="flex flex-col gap-1">
+            <label class="font-bold">Website</label>
+            <app-input-component [value]="personalInformation.website" (valueChange)="personalInformation.website = $event"  icon="pi pi-link" type="text" placeholder="Website" />
+        </div>
+        <div class="flex flex-col gap-1">
+            <label class="font-bold">Phone Number<span class="text-red-500">*</span></label>
+            <app-input-component mask="(999) 999-9999" [value]="personalInformation.phone_number" (valueChange)="personalInformation.phone_number = $event"  icon="pi pi-phone" type="mask" placeholder="Phone Number" />
+        </div>
+    </div>
+    <div class="flex justify-between w-10/12 m-auto">
+        <p-button label="Prev" icon="pi pi-arrow-left" iconPos="left" (click)="prevStep()"/>
+        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (click)="nextStep()"/>
+    </div>
+    
+</div>

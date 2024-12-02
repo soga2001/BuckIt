@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { InputComponent } from '../../custom-components/input/input.component';
-import { PasswordModule } from 'primeng/password';
-import { InputTextModule } from 'primeng/inputtext';
 import type { LoginInfoInterface } from '../../../assets/interface/RegistrationInformation';
 import { RegistrationService } from '../../service/registration.service';
 import { CommonModule } from '@angular/common';
@@ -14,10 +12,8 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [
     InputComponent, 
-    PasswordModule,
     CommonModule,
     ButtonModule,
-    InputTextModule,
     FormsModule,
   ],
   templateUrl: './login-information.component.html',

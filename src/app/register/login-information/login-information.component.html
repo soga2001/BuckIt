@@ -1,20 +1,20 @@
 <div class="flex flex-col gap-10">
-    <div class="login flex flex-col justify-center gap-3 mt-4 mx-auto min-w-[500px]">
+    <div class="login flex flex-col justify-center gap-3 mx-auto min-w-[500px]">
         <h1 class="text-3xl text-center font-extrabold">Login Information</h1>
         <div class="flex flex-col gap-1">
-            <label class="font-bold">Email</label>
+            <label class="font-bold">Email<span class="text-red-500">*</span></label>
             <app-input-component [value]="loginInformation.email" (valueChange)="loginInformation.email = $event"  icon="pi pi-envelope" type="text" placeholder="Email" />
         </div>
         <div class="flex flex-col gap-1">
-            <label class="font-bold">Password</label>
+            <label class="font-bold">Password<span class="text-red-500">*</span></label>
             <app-input-component icon="pi pi-lock" [value]="loginInformation.password" (valueChange)="loginInformation.password = $event" type="password" name="password" placeholder="Password" />
         </div>
         <div class="flex flex-col gap-1">
-            <label class="font-bold">Confirm Password</label>
+            <label class="font-bold">Confirm Password<span class="text-red-500">*</span></label>
             <app-input-component icon="pi pi-lock" [value]="loginInformation.confirm_password" (valueChange)="loginInformation.confirm_password = $event" type="password" name="confirm_password" placeholder="Confirm Password" />
         </div>
     </div>
-    <div class="flex justify-end w-11/12 mr-10">
+    <div class="flex justify-end w-10/12 m-auto">
         <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (click)="nextStep()"/>
     </div>
 </div>

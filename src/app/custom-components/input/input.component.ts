@@ -5,6 +5,7 @@ import { PasswordModule } from 'primeng/password';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputMask } from 'primeng/inputmask';
 
 
 interface City {
@@ -22,6 +23,7 @@ interface City {
     PasswordModule,
     InputGroupAddonModule,
     InputGroupModule,
+    InputMask,
   ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
@@ -45,6 +47,7 @@ export class InputComponent {
   @Input() minLength: number = 0;
   @Input() maxLength: number = 0;
   @Input() pattern: string = '';
+  @Input() mask: string = '';
 
   @Input() feedback: boolean = false;
   @Input() feedbackStyle: string = '';

@@ -15,6 +15,9 @@
             [toggleMask]="toggleMask"
         />
     }
+    @else if (type == "mask") {
+        <p-inputmask [mask]="mask" [(ngModel)]="value" (ngModelChange)="onValueChange($event)" [placeholder]="placeholder" />
+    }
     @else {
         <input [type]="type" [(ngModel)]="value" (ngModelChange)="onValueChange($event)" pInputText [placeholder]="placeholder" />
     }
