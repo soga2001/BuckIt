@@ -1,3 +1,29 @@
 <div>
-    Hello
+    <div class="h-96 w-full bg-blue-300">
+
+    </div>
+    <div class="flex flex-col">
+        <!-- <p-tabs [value]="0">
+            <p-tablist>
+                <p-tab class="grow flex justify-center" [value]="0">Header I</p-tab>
+                <p-tab class="grow flex justify-center" [value]="1">Header II</p-tab>
+                <p-tab value="0" class="grow flex justify-center" [routerLink]="['/@', username]">
+                    <span>BuckIts</span>
+                </p-tab>
+                <p-tab value="1" class="grow flex justify-center" [routerLink]="['/user', username, 'media']">
+                    <span>Media</span>
+                </p-tab>
+            </p-tablist>
+        </p-tabs> -->
+        <div class="flex w-full">
+            <a class="grow flex justify-center" [routerLink]="['/@', username]">
+                BuckIts
+            </a>
+            <a class="grow flex justify-center" [routerLink]="['/@', username, 'media']">
+                BuckIts
+            </a>
+        </div>
+    </div>
+    <router-outlet />
+
 </div>
