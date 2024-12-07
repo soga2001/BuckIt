@@ -5,7 +5,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputComponent } from '../../custom-components/input/input.component';
 import { FormsModule } from '@angular/forms';
 import type { PersonalInfoInterface } from '../../../assets/interface/RegistrationInformation';
-import { RegistrationService } from '../../service/registration.service';
+import { RegistrationService } from '../../service/registration/registration.service';
+import { SupabaseService } from '../../service/supabase/supabase.service';
 
 @Component({
   selector: 'app-personal-information',
@@ -22,12 +23,9 @@ import { RegistrationService } from '../../service/registration.service';
 export class PersonalInformationComponent implements OnInit {
   personalInformation: PersonalInfoInterface = {} as PersonalInfoInterface;
 
-  constructor(public registrationService: RegistrationService, private router: Router) {}
+  constructor(public registrationService: RegistrationService, private router: Router, private supabase: SupabaseService) {}
 
   ngOnInit(): void {
-    // if(this.registrationService.registrationInformation.loginInformation.email == '') {
-    //   this.router.navigate(['/register']);
-    // }
     this.personalInformation = this.registrationService.registrationInformation.personalInformation;
   }
 
@@ -39,11 +37,18 @@ export class PersonalInformationComponent implements OnInit {
   nextStep() {
     let valid = false;
     valid = (this.personalInformation.username != '' && this.personalInformation.phone_number != '');
-    // valid = valid && (this.personalInformation.password === this.personalInformation.confirm_password);
 
     if(valid) {
       this.registrationService.registrationInformation.personalInformation = this.personalInformation;
       this.router.navigate(['/register/verify-account']);
     }
+  }
+
+  signUp() {
+    // this.supabase.register(this.registrationService.registrationInformation).then(() => {
+    //   this.router.navigate(['/register/verify-account']);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
   }
 }

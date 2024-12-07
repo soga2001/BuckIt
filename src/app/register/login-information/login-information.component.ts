@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InputComponent } from '../../custom-components/input/input.component';
 import type { LoginInfoInterface } from '../../../assets/interface/RegistrationInformation';
-import { RegistrationService } from '../../service/registration.service';
+import { RegistrationService } from '../../service/registration/registration.service';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';

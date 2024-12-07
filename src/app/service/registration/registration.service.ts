@@ -1,33 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import type { RegistrationInfoInterface } from '../../assets/interface/RegistrationInformation';
-
-// interface RegistrationInformation {
-//   loginInformation: LoginInformation;
-//   personalInformation: PersonalInformation;
-//   avatar: Avatar;
-// }
-
-// interface LoginInformation {
-//   email: string;
-//   password: string;
-//   confirm_password: string;
-// }
-
-// interface PersonalInformation {
-//   username: string;
-//   full_name: string;
-//   phone_number: string;
-//   location: string;
-//   dob: string;
-//   website: string;
-//   bio: string;
-//   private: boolean;
-// }
-
-// interface Avatar {
-//   avatar: string;
-// }
+import type { RegistrationInfoInterface } from '../../../assets/interface/RegistrationInformation';
 
 @Injectable({
   providedIn: 'root'
