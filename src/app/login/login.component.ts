@@ -1,13 +1,26 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { InputComponent } from '../custom-components/input/input.component';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-login',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet, 
+    FormsModule, 
+    InputComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
+
 export class LoginComponent {
-  title = 'buckits';
+    email: string = '';
+    password: string = '';
+    title = 'buckits';
+
+    login() {
+      console.log('login');
+    }
 }

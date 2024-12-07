@@ -1,25 +1,39 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<main class="main ">
+  <div class="content flex flex-col items-center">
+    <h1 class="text-center font-black text-4xl">Sign In</h1>
+    <form class="flex flex-col gap-3 min-w-[500px]">
+      <div class="flex flex-col gap-1">
+        <label class="font-bold">Email</label>
+        <app-input-component [value]="email" (valueChange)="email = $event"  icon="mail" type="text" placeholder="Email" />
+    </div>
+    <div class="flex flex-col gap-1">
+        <label class="font-bold">Password</label>
+        <app-input-component icon="password" iconLibrary="material" [value]="password" (valueChange)="password = $event" type="password" name="password" placeholder="Password" />
+    </div>
+        
+        <div class="flex-row">
+          <div>
+          </div>
+          <span class="span">Forgot password?</span>
+        </div>
+        <button (click)="login()" class="button">Sign In</button>
+        <p class="p">Don't have an account? <span class="span">Sign Up</span>
 
-<main class="main">
-  <div class="content">
-    Login Page
+        </p><p class="p line">Or With</p>
+
+        <div class="flex-row">
+          <button class="btn google">
+            <i class="pi pi-google"></i>
+            Google 
+          </button><button class="btn apple">
+            <i class="pi pi-apple"></i>
+            Apple   
+          </button>
+      </div>
+    </form>
   </div>
 </main>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
 <router-outlet />

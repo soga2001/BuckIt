@@ -1,0 +1,28 @@
+.tab {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid #333;
+    padding: 10px;
+    font-weight: 700;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &.tab-active {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-style: inset;
+        border-color: fuchsia;
+        font-weight: 900;
+    }
+}
+
+
+.cdot {
+    font-size: 1.2rem;     /* Adjust the size */
+  }
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    aspect-ratio: 1/1 !important;
+}

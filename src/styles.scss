@@ -1,1 +1,139 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base'; 
+@import 'tailwindcss/components'; 
+@import 'tailwindcss/utilities';
+
+@import "primeicons/primeicons.css";
+@import 'material-icons/iconfont/material-icons.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+
+.p-steps {
+
+    .p-steps-item {
+        border: none;
+        color: white;
+        font-weight: 500;
+
+        .p-steps-item-link {
+            
+            .p-steps-item-number {
+                border-color: white;
+                color: white;
+
+            }
+
+            .p-steps-item-label {
+                color: white;
+            }
+
+        }
+    }
+
+    .p-steps-item-active {
+
+
+        .p-steps-item-link {
+            
+            .p-steps-item-number {
+                border-color: fuchsia;
+                color: fuchsia;
+
+            }
+
+            .p-steps-item-label {
+                color: fuchsia;
+            }
+
+
+        }
+    }
+
+}
+
+.p-inputgroup .p-inputtext, .p-password.p-inputwrapper ,.p-fluid .p-inputgroup .p-inputtext,
+p-password, .p-password.p-inputwrapper, p-inputmask { width: 100% !important; }
+
+p-input-group{
+    border: 1px solid white;
+    width: 100%;
+    
+    &:has(p-inputgroup-addon) input,
+    &:has(p-inputgroup-addon) p-inputmask .p-inputtext {
+        padding-left: 0px !important;
+    }
+
+    p-password, .p-password.p-inputwrapper, p-inputmask {
+        width: 100%;
+    }
+
+    input, p-inputmask .p-inputtext {
+        border: none !important;
+        width: 100%;
+        padding-left: 10px !important;
+        background-color: transparent !important;
+
+
+        &:focus {
+            border: none !important; 
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        &:active {
+            outline: none !important;
+        }
+    }
+
+    p-inputgroup-addon {
+        background-color: transparent;
+        border: none !important;
+    }
+
+    &:focus-within {
+        border: 1px solid fuchsia;
+
+        p-inputgroup-addon {
+             * {
+                color: fuchsia;
+             }
+            // color: fuchsia;
+        }
+    }
+}
+
+p-inputotp {
+    input {
+
+        &:focus {
+            border: 1px solid fuchsia !important;
+            outline: none;
+        }
+    }
+}
+
+.button {
+    background-color: transparent !important;
+    color: white !important;
+    border-color: fuchsia !important;
+
+    &:hover {
+        background-color: rgba(255, 0, 255, .3) !important;
+        color: white !important;
+    }
+}
+
+.button-secondary {
+    background-color: transparent !important;
+    border-color: white !important;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, .3) !important;
+        color: white !important;
+    }
+}

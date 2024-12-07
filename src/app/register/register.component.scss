@@ -1,0 +1,60 @@
+
+  
+  .p-steps {
+    flex-shrink: 0; /* Prevent shrinking */
+  }
+  
+  .outlet {
+    flex-grow: 1; /* Take the remaining space */
+    width: 100%;
+    overflow: auto; /* Prevent content overflow */
+  }
+  
+  .flex.justify-between {
+    flex-shrink: 0; /* Prevent shrinking */
+  }
+  
+
+
+.p-steps {
+
+    .p-steps-item {
+        border: none;
+        color: white;
+        font-weight: 500;
+
+        .p-steps-item-link {
+            
+            .p-steps-item-number {
+                border-color: white;
+                color: white;
+
+            }
+
+            .p-steps-item-label {
+                color: white;
+            }
+
+
+        }
+    }
+
+    // .p-steps-item-active {
+
+
+    //     .p-steps-item-link {
+            
+    //         .p-steps-item-number {
+    //             border-color: fuchsia;
+    //             color: fuchsia;
+
+    //         }
+
+    //         .p-steps-item-label {
+    //             color: fuchsia;
+    //         }
+
+
+    //     }
+    // }
+}

@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## To Create a new component within a module ##
+- `ng g module {Module Name}` - To create a Module if there isn't one already
+- `ng g component {Component Name}` - To create a new component
+
+## To Install Supabase ##
+- `npm install @supabase/supabase-js` - install supabase
+- `ng g s supabase` - Intitalize supabase client

@@ -1,0 +1,41 @@
+<p-input-group>
+    @if (icon != '' && iconPos == 'prepend') {
+        <p-inputgroup-addon>
+            @if (iconLibrary == 'primeng') {
+                <i [class]="icon"></i>
+            }
+            @else {
+                <i [class]="classes" [ngClass]="[
+                    iconStyle == '' ? 'material-icons' : 'material-icons ' + iconStyle,
+                ]">{{icon}}</i>
+            }
+        </p-inputgroup-addon>
+    }
+    
+    @if (type == "password"){
+        <p-password 
+            [placeholder]="placeholder" 
+            [(ngModel)]="value" 
+            (ngModelChange)="onValueChange($event)"
+            [name]="name" 
+            [feedback]="feedback" 
+            [toggleMask]="toggleMask"
+        />
+    }
+    @else if (type == "mask") {
+        <p-inputmask [mask]="mask" [(ngModel)]="value" (ngModelChange)="onValueChange($event)" [placeholder]="placeholder" />
+    }
+    @else {
+        <input [type]="type" [(ngModel)]="value" (ngModelChange)="onValueChange($event)" pInputText [placeholder]="placeholder" />
+    }
+    @if (icon != '' && iconPos == 'append') {
+        <p-inputgroup-addon>
+            @if (iconLibrary == 'primeng') {
+                <i [class]="icon"></i>
+            }
+            @else {
+                <i class="material-icons">{{icon}}</i>
+            }
+        </p-inputgroup-addon>
+    }
+</p-input-group>
