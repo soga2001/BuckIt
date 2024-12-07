@@ -1,4 +1,4 @@
-import { Routes, UrlMatchResult, UrlSegment } from '@angular/router';
+import { Route, Routes, UrlMatchResult, UrlSegment, UrlSegmentGroup } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginInformationComponent } from './register/login-information/login-information.component';
@@ -10,15 +10,17 @@ import { ProfileComponent } from './profile/profile.component';
 import { BuckItsComponent } from './profile/buck-its/buck-its.component';
 import { MediaComponent } from './profile/media/media.component';
 
-export function usernameMatcher(url: UrlSegment[]): UrlMatchResult | null {
-    if (url.length === 1 && /^@[\w]+$/.test(url[0].path)) {
-      return {
-        consumed: url,
-        posParams: { username: new UrlSegment(url[0].path.slice(1), {}) }
-      };
+
+export function usernameMatcher(url: UrlSegment[], group: UrlSegmentGroup, route: Route): { consumed: UrlSegment[]; posParams?: { [key: string]: UrlSegment } } | null {
+    if (url.length && url[0].path.startsWith('@')) {
+        const username = url[0].path.slice(1); // Remove the '@'
+        return {
+        consumed: [url[0]],
+        posParams: { username: new UrlSegment(username, {}) },
+        };
     }
     return null;
-  }
+}
 
 export const routes: Routes = [
     {
@@ -28,40 +30,7 @@ export const routes: Routes = [
             title: "Home"
         }
     },
-    {
-        component: ProfileComponent,
-        data: {
-            title: "Profile"
-        },
-        // path: 'user/:username',
-        matcher: (url) => {
-            if (url.length === 1 && url[0].path.match(/^@[\w]+$/gm)) {
-              return {
-                consumed: url,
-                posParams: {
-                  username: new UrlSegment(url[0].path.substr(1), {})
-                }
-              };
-            }
-            return null;
-        },
-        children: [
-            {
-                path: '',
-                component: BuckItsComponent,
-                data: {
-                    title: "Buck Its"
-                }
-            },
-            {
-                path: 'media',
-                component: MediaComponent,
-                data: {
-                    title: "Media"
-                }
-            }
-        ]
-    },
+    
     {
         path: 'login',
         component: LoginComponent,
@@ -95,7 +64,27 @@ export const routes: Routes = [
         ]
     },
     {
-        path: '**',
-        redirectTo: ''
-    }
+        component: ProfileComponent,
+        data: {
+            title: "Profile"
+        },
+        matcher: usernameMatcher,
+        children: [
+            {
+                path: '',
+                component: BuckItsComponent,
+                data: {
+                    title: "Buck Its"
+                }
+            },
+            {
+                path: 'media',
+                component: MediaComponent,
+                data: {
+                    title: "Media"
+                }
+            }
+        ]
+    },
+    
 ];

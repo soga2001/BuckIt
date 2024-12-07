@@ -16,11 +16,11 @@
             </p-tablist>
         </p-tabs> -->
         <div class="flex w-full">
-            <a class="grow flex justify-center" [routerLink]="['/@', username]">
+            <a class="grow flex justify-center tab border-r" [routerLink]="['/@' + username]" routerLinkActive="tab-active">
                 BuckIts
             </a>
-            <a class="grow flex justify-center" [routerLink]="['/@', username, 'media']">
-                BuckIts
+            <a class="grow flex justify-center tab border-l" [routerLink]="['/@' +username, 'media']" routerLinkActive="tab-active">
+                Media
             </a>
         </div>
     </div>
