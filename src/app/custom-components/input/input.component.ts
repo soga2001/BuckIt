@@ -65,7 +65,7 @@ export class InputComponent {
   @Input() icon: string = ''; 
   @Input() iconPos: string = 'prepend'; // prepend | append
   @Input() iconLibrary: string = 'material'; // primeng | material
-  @Input() iconStyle: string = ''; // Sharp | Outlined | Round | ''
+  @Input() iconStyle: string = ''; // sharp | outlined | round | ''
 
   @Input() value: any;
 

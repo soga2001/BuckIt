@@ -8,8 +8,8 @@
         <p class="text-muted-color block mb-8">Please enter the code sent to your email.</p>
         <p-inputotp [(ngModel)]="otp" size="large" [length]="6" />
         <div class="flex justify-between mt-8 self-stretch">
-            <p-button label="Resend Code" [link]="true" class="p-0 !border-none"/>
-            <p-button label="Submit Code" class="cursor-pointer"/>
+            <p-button label="Resend Code" styleClass="button" [link]="true" class="p-0 !border-none"/>
+            <p-button label="Submit Code" styleClass="button" class="cursor-pointer"/>
         </div>
     </div>
 </div>

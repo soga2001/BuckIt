@@ -117,8 +117,23 @@ p-inputotp {
     }
 }
 
-.p-button {
+.button {
     background-color: transparent !important;
     color: white !important;
     border-color: fuchsia !important;
+
+    &:hover {
+        background-color: rgba(255, 0, 255, .3) !important;
+        color: white !important;
+    }
+}
+
+.button-secondary {
+    background-color: transparent !important;
+    border-color: white !important;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, .3) !important;
+        color: white !important;
+    }
 }

@@ -26,48 +26,44 @@ export const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
-        data: {
-            title: "Home"
-        }
+        title: "Home",
     },
     
     {
         path: 'login',
         component: LoginComponent,
-        data: {
-            title: 'Login'
-        }
+        title: "Login",
     },
     {
         path: 'register',
         component: RegisterComponent,
-        data: {
-            title: 'Register'
-        },
+        title: "Register",
         children: [
             {
                 path: '', // child route path
                 component: LoginInformationComponent, // child route component that the router renders
+                title: "Register | Login Information"
             },
             {
                 path: 'personal-information',
                 component: PersonalInformationComponent, // another child route component that the router renders
+                title: "Register | Personal Information"
             },
             {
                 path: 'upload-avatar', // default child route
                 component: UploadAvatarComponent, // another child route component that the router renders
+                title: "Register | Upload Avatar"
             },
             {
                 path: 'verify-account',
                 component: VerifyAccountComponent, // another child route component that the router renders
+                title: "Register | Verify Account"
             }
         ]
     },
     {
         component: ProfileComponent,
-        data: {
-            title: "Profile"
-        },
+        title: "Profile",
         matcher: usernameMatcher,
         children: [
             {
